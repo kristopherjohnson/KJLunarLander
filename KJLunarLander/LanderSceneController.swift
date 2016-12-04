@@ -10,8 +10,8 @@ import SpriteKit
 /// Implements the lander game.
 
 class LanderSceneController: NSObject {
-    let view: SKView
-    let scene: SKScene
+    private let view: SKView
+    private let scene: SKScene
 
     weak var controlInput: ControlInput?
     
@@ -37,7 +37,7 @@ class LanderSceneController: NSObject {
             view.showsFields = true
         }
 
-        let surface = LunarSurfaceSprite()
+        let surface = SurfaceSprite()
         surface.position = CGPoint(x: surface.size.width / 2,
                                    y: surface.size.height / 2)
         scene.addChild(surface)
@@ -47,6 +47,7 @@ class LanderSceneController: NSObject {
         scene.addChild(lander)
 
         super.init()
+
         scene.delegate = self
         scene.physicsWorld.contactDelegate = self
     }

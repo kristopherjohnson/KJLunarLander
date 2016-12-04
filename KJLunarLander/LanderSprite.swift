@@ -20,6 +20,7 @@ class LanderSprite: SKSpriteNode {
 
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.isDynamic = true
+        physicsBody!.usesPreciseCollisionDetection = true
         physicsBody!.allowsRotation = false
         physicsBody!.categoryBitMask = Category.lander
         physicsBody!.contactTestBitMask = Category.surface | Category.target

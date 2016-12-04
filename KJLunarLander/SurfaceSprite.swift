@@ -9,7 +9,7 @@ import SpriteKit
 
 /// Sprite for the lunar surface
 
-class LunarSurfaceSprite: SKSpriteNode {
+class SurfaceSprite: SKSpriteNode {
     static let spriteName = "surface"
 
     convenience init() {
@@ -17,10 +17,11 @@ class LunarSurfaceSprite: SKSpriteNode {
                                  height: Constant.sceneSize.height / 20)
         self.init(color: .gray, size: surfaceSize)
 
-        name = LunarSurfaceSprite.spriteName
+        name = SurfaceSprite.spriteName
 
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody!.isDynamic = false
+        physicsBody!.affectedByGravity = false
         physicsBody!.allowsRotation = false
         physicsBody!.categoryBitMask = Category.surface
         physicsBody!.contactTestBitMask = Category.lander
