@@ -2,7 +2,6 @@
 //  KJLunarLanderTests.swift
 //  KJLunarLanderTests
 //
-//  Created by Kristopher Johnson on 11/25/16.
 //  Copyright © 2016 Kristopher Johnson. All rights reserved.
 //
 
