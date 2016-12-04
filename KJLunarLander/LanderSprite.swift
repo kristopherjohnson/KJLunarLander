@@ -18,12 +18,20 @@ class LanderSprite: SKSpriteNode {
 
         name = LanderSprite.spriteName
 
-        physicsBody = SKPhysicsBody(rectangleOf: size)
-        physicsBody!.isDynamic = true
-        physicsBody!.usesPreciseCollisionDetection = true
-        physicsBody!.allowsRotation = false
-        physicsBody!.categoryBitMask = Category.lander
-        physicsBody!.contactTestBitMask = Category.surface | Category.target
-        physicsBody!.collisionBitMask = Category.surface
+        let body = SKPhysicsBody(rectangleOf: size)
+
+        body.isDynamic = true
+        body.usesPreciseCollisionDetection = true
+        body.allowsRotation = true
+
+        body.mass = Constant.landerMass
+        body.linearDamping = 0.0
+        body.angularDamping = 4.0
+
+        body.categoryBitMask = Category.lander
+        body.contactTestBitMask = Category.surface | Category.target
+        body.collisionBitMask = Category.surface
+
+        physicsBody = body
     }
 }

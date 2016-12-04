@@ -14,6 +14,7 @@
 		4E0DFDA41DF3D38A00A8A24F /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DFDA31DF3D38A00A8A24F /* Constant.swift */; };
 		4E0DFDA61DF3D5F400A8A24F /* ControlInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DFDA51DF3D5F400A8A24F /* ControlInput.swift */; };
 		4E0DFDA81DF45CF100A8A24F /* SurfaceSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DFDA71DF45CF100A8A24F /* SurfaceSprite.swift */; };
+		4E0DFDAA1DF4A34900A8A24F /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DFDA91DF4A34900A8A24F /* ControlButton.swift */; };
 		4ED5CF2B1DE919A200D2BD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */; };
 		4ED5CF331DE919A200D2BD01 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF321DE919A200D2BD01 /* GameViewController.swift */; };
 		4ED5CF361DE919A200D2BD01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5CF341DE919A200D2BD01 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		4E0DFDA31DF3D38A00A8A24F /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		4E0DFDA51DF3D5F400A8A24F /* ControlInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlInput.swift; sourceTree = "<group>"; };
 		4E0DFDA71DF45CF100A8A24F /* SurfaceSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurfaceSprite.swift; sourceTree = "<group>"; };
+		4E0DFDA91DF4A34900A8A24F /* ControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		4ED5CF271DE919A200D2BD01 /* KJLunarLander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KJLunarLander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4ED5CF321DE919A200D2BD01 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				4ED5CF371DE919A200D2BD01 /* Assets.xcassets */,
 				4E0DFD9F1DF3CC5D00A8A24F /* Category.swift */,
 				4E0DFDA31DF3D38A00A8A24F /* Constant.swift */,
+				4E0DFDA91DF4A34900A8A24F /* ControlButton.swift */,
 				4E0DFDA51DF3D5F400A8A24F /* ControlInput.swift */,
 				4ED5CF321DE919A200D2BD01 /* GameViewController.swift */,
 				4E0DFDA11DF3CFE100A8A24F /* Geometry.swift */,
@@ -102,8 +105,8 @@
 				4E0DFD9B1DF3C43200A8A24F /* LanderSceneController.swift */,
 				4E0DFD9D1DF3CBAF00A8A24F /* LanderSprite.swift */,
 				4ED5CF391DE919A200D2BD01 /* LaunchScreen.storyboard */,
-				4E0DFDA71DF45CF100A8A24F /* SurfaceSprite.swift */,
 				4ED5CF341DE919A200D2BD01 /* Main.storyboard */,
+				4E0DFDA71DF45CF100A8A24F /* SurfaceSprite.swift */,
 			);
 			path = KJLunarLander;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				4ED5CF331DE919A200D2BD01 /* GameViewController.swift in Sources */,
 				4ED5CF2B1DE919A200D2BD01 /* AppDelegate.swift in Sources */,
 				4E0DFD9E1DF3CBAF00A8A24F /* LanderSprite.swift in Sources */,
+				4E0DFDAA1DF4A34900A8A24F /* ControlButton.swift in Sources */,
 				4E0DFDA61DF3D5F400A8A24F /* ControlInput.swift in Sources */,
 				4E0DFD9C1DF3C43200A8A24F /* LanderSceneController.swift in Sources */,
 			);

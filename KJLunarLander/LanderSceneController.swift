@@ -13,12 +13,16 @@ class LanderSceneController: NSObject {
     private let view: SKView
     private let scene: SKScene
 
+    fileprivate let lander: LanderSprite
+    fileprivate let surface: SurfaceSprite
+
     weak var controlInput: ControlInput?
     
     public init(view: SKView) {
         self.view = view
 
         scene = SKScene(size: Constant.sceneSize)
+        scene.backgroundColor = .black
         scene.scaleMode = .aspectFit
 
         scene.physicsWorld.gravity = CGVector(dx: 0,
@@ -37,12 +41,12 @@ class LanderSceneController: NSObject {
             view.showsFields = true
         }
 
-        let surface = SurfaceSprite()
+        surface = SurfaceSprite()
         surface.position = CGPoint(x: surface.size.width / 2,
                                    y: surface.size.height / 2)
         scene.addChild(surface)
 
-        let lander = LanderSprite()
+        lander = LanderSprite()
         lander.position = Constant.landerInitialPosition
         scene.addChild(lander)
 
@@ -56,7 +60,32 @@ class LanderSceneController: NSObject {
 // MARK: - SKSceneDelegate
 extension LanderSceneController: SKSceneDelegate {
     public func update(_ currentTime: TimeInterval, for scene: SKScene) {
+        // If lander goes off left or right edge, wrap around to opposite edge.
+        let sceneWidth = scene.size.width
+        while lander.position.x > sceneWidth {
+            lander.position.x -= sceneWidth
+        }
+        while lander.position.x < 0 {
+            lander.position.x += sceneWidth
+        }
 
+        // Apply control inputs
+        
+        guard let controlInput = controlInput else { return }
+        guard let landerBody = lander.physicsBody else { return }
+
+        if controlInput.thrustInput != 0 {
+            let thrustForce = controlInput.thrustInput * Constant.landerThrust
+            let thrustDirection = Float(lander.zRotation) + Float(M_PI_2)
+            let thrustVector = CGVector(dx: thrustForce * CGFloat(cosf(thrustDirection)),
+                                        dy: thrustForce * CGFloat(sinf(thrustDirection)))
+            landerBody.applyForce(thrustVector)
+        }
+
+        if controlInput.rotationInput != 0 {
+            let torque = controlInput.rotationInput * Constant.landerTorque
+            landerBody.applyTorque(torque)
+        }
     }
 
     public func didEvaluateActions(for scene: SKScene) {
