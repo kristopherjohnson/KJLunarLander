@@ -9,12 +9,12 @@ import SpriteKit
 
 /// Sprite for the player-controlled lander.
 
-final class LanderSprite: SKSpriteNode {
+class LanderSprite: SKSpriteNode {
     /// Name used for all instances of `HeroSprite`.
     static let spriteName = "lander"
 
     convenience init() {
-        self.init(color: .gray, size: Constant.landerSize)
+        self.init(color: .orange, size: Constant.landerSize)
 
         name = LanderSprite.spriteName
 

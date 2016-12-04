@@ -7,6 +7,8 @@
 
 import SpriteKit
 
+/// Implements the lander game.
+
 class LanderSceneController: NSObject {
     let view: SKView
     let scene: SKScene
@@ -19,7 +21,8 @@ class LanderSceneController: NSObject {
         scene = SKScene(size: Constant.sceneSize)
         scene.scaleMode = .aspectFit
 
-        scene.physicsWorld.gravity = CGVector(dx: 0, dy: Constant.lunarGravity)
+        scene.physicsWorld.gravity = CGVector(dx: 0,
+                                              dy: Constant.lunarGravity)
 
         view.presentScene(scene)
 
@@ -33,6 +36,11 @@ class LanderSceneController: NSObject {
             view.showsPhysics = true
             view.showsFields = true
         }
+
+        let surface = LunarSurfaceSprite()
+        surface.position = CGPoint(x: surface.size.width / 2,
+                                   y: surface.size.height / 2)
+        scene.addChild(surface)
 
         let lander = LanderSprite()
         lander.position = Constant.landerInitialPosition
