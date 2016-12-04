@@ -30,6 +30,10 @@ class GameViewController: UIViewController {
         landerSceneController.controlInput = self
     }
 
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscape
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }

@@ -15,6 +15,9 @@ class LanderSceneController: NSObject {
 
     fileprivate let lander: LanderSprite
     fileprivate let surface: SurfaceSprite
+    fileprivate let hud: HUD
+
+    fileprivate var lastHUDUpdateTime: TimeInterval = 0
 
     weak var controlInput: ControlInput?
     
@@ -40,6 +43,8 @@ class LanderSceneController: NSObject {
             view.showsPhysics = true
             view.showsFields = true
         }
+
+        hud = HUD(parent: scene)
 
         surface = SurfaceSprite()
         surface.position = CGPoint(x: surface.size.width / 2,
@@ -69,6 +74,11 @@ extension LanderSceneController: SKSceneDelegate {
             lander.position.x += sceneWidth
         }
 
+        if (currentTime - lastHUDUpdateTime) > 0.1 {
+            hud.updateDisplayValues(lander: lander)
+            lastHUDUpdateTime = currentTime
+        }
+        
         // Apply control inputs
         
         guard let controlInput = controlInput else { return }
