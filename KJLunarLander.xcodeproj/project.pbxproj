@@ -23,6 +23,7 @@
 		4ED5CF3B1DE919A200D2BD01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5CF391DE919A200D2BD01 /* LaunchScreen.storyboard */; };
 		4ED5CF461DE919A200D2BD01 /* KJLunarLanderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF451DE919A200D2BD01 /* KJLunarLanderTests.swift */; };
 		4EFA3CC31DF8E81000319494 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA3CC21DF8E81000319494 /* Color.swift */; };
+		4EFA3CC51DF8EA9200319494 /* ThrustControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA3CC41DF8EA9200319494 /* ThrustControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		4ED5CF451DE919A200D2BD01 /* KJLunarLanderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KJLunarLanderTests.swift; sourceTree = "<group>"; };
 		4ED5CF471DE919A200D2BD01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4EFA3CC21DF8E81000319494 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		4EFA3CC41DF8EA9200319494 /* ThrustControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThrustControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				4ED5CF391DE919A200D2BD01 /* LaunchScreen.storyboard */,
 				4ED5CF341DE919A200D2BD01 /* Main.storyboard */,
 				4E0DFDA71DF45CF100A8A24F /* SurfaceSprite.swift */,
+				4EFA3CC41DF8EA9200319494 /* ThrustControl.swift */,
 			);
 			path = KJLunarLander;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				4EFA3CC31DF8E81000319494 /* Color.swift in Sources */,
 				4ED5CF331DE919A200D2BD01 /* GameViewController.swift in Sources */,
 				4ED5CF2B1DE919A200D2BD01 /* AppDelegate.swift in Sources */,
+				4EFA3CC51DF8EA9200319494 /* ThrustControl.swift in Sources */,
 				4E0DFD9E1DF3CBAF00A8A24F /* LanderSprite.swift in Sources */,
 				4E0DFDAA1DF4A34900A8A24F /* ControlButton.swift in Sources */,
 				4E0DFDA61DF3D5F400A8A24F /* ControlInput.swift in Sources */,

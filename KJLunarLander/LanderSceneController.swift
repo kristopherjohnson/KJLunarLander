@@ -74,11 +74,6 @@ extension LanderSceneController: SKSceneDelegate {
             lander.position.x += sceneWidth
         }
 
-        if (currentTime - lastHUDUpdateTime) > 0.1 {
-            hud.updateDisplayValues(lander: lander)
-            lastHUDUpdateTime = currentTime
-        }
-        
         // Apply control inputs
         
         guard let controlInput = controlInput else { return }
@@ -95,6 +90,11 @@ extension LanderSceneController: SKSceneDelegate {
         if controlInput.rotationInput != 0 {
             let torque = controlInput.rotationInput * Constant.landerTorque
             landerBody.applyTorque(torque)
+        }
+
+        if (currentTime - lastHUDUpdateTime) > 0.1 {
+            hud.updateDisplayValues(lander: lander, thrust: controlInput.thrustInput)
+            lastHUDUpdateTime = currentTime
         }
     }
 

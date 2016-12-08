@@ -68,24 +68,28 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wV4-Fb-qPu" userLabel="rightControlPanel">
                                 <rect key="frame" x="444" y="0.0" width="124" height="320"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWQ-g8-MCo" userLabel="thrustButton" customClass="ControlButton" customModule="KJLunarLander" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="116" width="108" height="88"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <accessibility key="accessibilityConfiguration" identifier="thrustButton" label="thrust"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="88" id="4tI-6C-8Tl"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thrust" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-ZY-irE">
+                                        <rect key="frame" x="26" y="51.5" width="73.5" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="20"/>
-                                        <state key="normal" title="Thrust">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                    </button>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nEx-Aw-21X" customClass="ThrustControl" customModule="KJLunarLander" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="80" width="108" height="160"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="160" id="YIo-mA-cs2"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="pWQ-g8-MCo" firstAttribute="centerY" secondItem="wV4-Fb-qPu" secondAttribute="centerY" id="LLr-h7-nz3"/>
-                                    <constraint firstAttribute="trailing" secondItem="pWQ-g8-MCo" secondAttribute="trailing" constant="8" id="Xxo-Cx-xUg"/>
-                                    <constraint firstItem="pWQ-g8-MCo" firstAttribute="leading" secondItem="wV4-Fb-qPu" secondAttribute="leading" constant="8" id="pfs-Dz-auA"/>
+                                    <constraint firstItem="nEx-Aw-21X" firstAttribute="top" secondItem="Tg6-ZY-irE" secondAttribute="bottom" constant="8" id="4VV-VB-T7D"/>
+                                    <constraint firstItem="Tg6-ZY-irE" firstAttribute="centerX" secondItem="nEx-Aw-21X" secondAttribute="centerX" id="Itu-Ga-03t"/>
+                                    <constraint firstItem="nEx-Aw-21X" firstAttribute="centerX" secondItem="wV4-Fb-qPu" secondAttribute="centerX" id="NLS-BN-Q5K"/>
+                                    <constraint firstItem="nEx-Aw-21X" firstAttribute="leading" secondItem="wV4-Fb-qPu" secondAttribute="leading" constant="8" id="OAY-6x-eYh"/>
+                                    <constraint firstItem="nEx-Aw-21X" firstAttribute="centerY" secondItem="wV4-Fb-qPu" secondAttribute="centerY" id="lUq-Wn-DaS"/>
+                                    <constraint firstAttribute="trailing" secondItem="nEx-Aw-21X" secondAttribute="trailing" constant="8" id="okG-Nl-gT4"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -108,7 +112,7 @@
                         <outlet property="leftButton" destination="R1z-9h-Jpj" id="S74-bR-h8r"/>
                         <outlet property="rightButton" destination="bDq-zq-eQP" id="0ra-Qc-28E"/>
                         <outlet property="skView" destination="da9-p9-Fz7" id="Oj5-YE-nOm"/>
-                        <outlet property="thrustButton" destination="pWQ-g8-MCo" id="yJT-0R-615"/>
+                        <outlet property="thrustControl" destination="nEx-Aw-21X" id="YLD-9c-kHh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

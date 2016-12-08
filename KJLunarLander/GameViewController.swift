@@ -11,8 +11,8 @@ import SpriteKit
 /// Main view controller.
 /// 
 /// The view controller does little except initialize a
-/// LanderSceneController (which implements the game-playing
-/// logic), and provide control inputs.
+/// LanderSceneController (which implements the gameplay
+/// simulation), and route control inputs to that scene.
 
 class GameViewController: UIViewController {
 
@@ -20,14 +20,15 @@ class GameViewController: UIViewController {
 
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var rightButton: UIButton!
-    @IBOutlet weak var thrustButton: UIButton!
 
-    private var landerSceneController: LanderSceneController!
+    @IBOutlet weak var thrustControl: ThrustControl!
+
+    private var landerSceneController: LanderSceneController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         landerSceneController = LanderSceneController(view: skView)
-        landerSceneController.controlInput = self
+        landerSceneController!.controlInput = self
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -42,9 +43,8 @@ class GameViewController: UIViewController {
 // MARK: - ControlInput
 
 // We currently have a simple control scheme based upon 
-// three UIButtons.  Eventually the goal is to have more
-// sophisticated onscreen controls and also support
-// game controllers.
+// two UIButtons and a thrust control.  Eventually we
+// want to also support game controllers.
 
 extension GameViewController: ControlInput {
 
@@ -63,11 +63,6 @@ extension GameViewController: ControlInput {
     }
 
     var thrustInput: CGFloat {
-        if thrustButton.isTracking {
-            return 1.0
-        }
-        else {
-            return 0.0;
-        }
+        return thrustControl.value
     }
 }
