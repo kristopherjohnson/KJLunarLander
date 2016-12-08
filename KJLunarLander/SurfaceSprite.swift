@@ -15,7 +15,7 @@ class SurfaceSprite: SKSpriteNode {
     convenience init() {
         let surfaceSize = CGSize(width: Constant.sceneSize.width,
                                  height: Constant.sceneSize.height / 20)
-        self.init(color: .gray, size: surfaceSize)
+        self.init(color: Color.surface, size: surfaceSize)
 
         name = SurfaceSprite.spriteName
 

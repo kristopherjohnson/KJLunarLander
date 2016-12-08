@@ -11,8 +11,8 @@ import UIKit
 
 class ControlButton: UIButton {
 
-    var highlightBackgroundColor = UIColor.orange
-    var normalBackgroundColor = UIColor.lightGray
+    var highlightBackgroundColor = Color.controlHighlight
+    var normalBackgroundColor = Color.controlNormal
 
     override var isHighlighted: Bool {
         didSet {

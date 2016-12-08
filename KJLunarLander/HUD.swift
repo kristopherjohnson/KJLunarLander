@@ -12,8 +12,8 @@ import SpriteKit
 class HUD: SKNode {
     static let spriteName = "hud"
 
-    private static let fontName = "GillSans-Light"
-    private static let fontSize: CGFloat = 24
+    private static let fontName = "Avenir-Light"
+    private static let fontSize: CGFloat = 20
 
     private static let linePitch: CGFloat = 12
 
@@ -86,7 +86,7 @@ class HUD: SKNode {
     private func addNodes(valueNode: SKLabelNode, labelText: String, viewPosition: CGPoint) {
         if let skView = self.scene?.view {
             let valueScenePosition = skView.convert(viewPosition, to: self.scene!)
-            let labelScenePosition = skView.convert(viewPosition.pointToLeft(by: 4), to: self.scene!)
+            let labelScenePosition = skView.convert(viewPosition.pointToLeft(by: 6), to: self.scene!)
             let label = makeLabelNode(text: labelText)
 
             valueNode.position = valueScenePosition
@@ -103,6 +103,7 @@ class HUD: SKNode {
     private func makeLabelNode(text: String) -> SKLabelNode {
         let node = SKLabelNode(fontNamed: HUD.fontName)
         node.fontSize = HUD.fontSize
+        node.fontColor = Color.hud
         node.horizontalAlignmentMode = .right
         node.text = text
         return node
@@ -114,6 +115,7 @@ class HUD: SKNode {
     private func makeValueNode() -> SKLabelNode {
         let node = SKLabelNode(fontNamed: HUD.fontName)
         node.fontSize = HUD.fontSize
+        node.fontColor = Color.hud
         node.horizontalAlignmentMode = .left
         return node
     }

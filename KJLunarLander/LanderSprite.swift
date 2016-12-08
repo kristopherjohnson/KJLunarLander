@@ -14,7 +14,7 @@ class LanderSprite: SKSpriteNode {
     static let spriteName = "lander"
 
     convenience init() {
-        self.init(color: .orange, size: Constant.landerSize)
+        self.init(color: Color.lander, size: Constant.landerSize)
 
         name = LanderSprite.spriteName
 
