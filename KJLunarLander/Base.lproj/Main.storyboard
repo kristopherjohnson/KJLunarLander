@@ -53,15 +53,23 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKI-Wf-F9r">
+                                        <rect key="frame" x="22.5" y="90.5" width="80.5" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="pKI-Wf-F9r" firstAttribute="centerX" secondItem="Mp5-1b-WaO" secondAttribute="centerX" id="1gh-0e-Ds5"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="centerY" secondItem="Mp5-1b-WaO" secondAttribute="centerY" id="2T6-IJ-vT5"/>
                                     <constraint firstItem="bDq-zq-eQP" firstAttribute="centerY" secondItem="Mp5-1b-WaO" secondAttribute="centerY" id="3Cf-Po-Dxt"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="height" secondItem="bDq-zq-eQP" secondAttribute="height" id="Igf-Dy-DqS"/>
                                     <constraint firstAttribute="trailing" secondItem="bDq-zq-eQP" secondAttribute="trailing" constant="8" id="a6d-o0-mBA"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="leading" secondItem="Mp5-1b-WaO" secondAttribute="leading" constant="8" id="b4h-cM-XV2"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="width" secondItem="bDq-zq-eQP" secondAttribute="width" id="d5k-Fp-i7K"/>
+                                    <constraint firstItem="R1z-9h-Jpj" firstAttribute="top" secondItem="pKI-Wf-F9r" secondAttribute="bottom" constant="8" id="d9H-Os-rot"/>
                                     <constraint firstItem="bDq-zq-eQP" firstAttribute="leading" secondItem="R1z-9h-Jpj" secondAttribute="trailing" constant="4" id="qMM-vU-cZl"/>
                                 </constraints>
                             </view>
@@ -69,8 +77,8 @@
                                 <rect key="frame" x="444" y="0.0" width="124" height="320"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thrust" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-ZY-irE">
-                                        <rect key="frame" x="26" y="51.5" width="73.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="20"/>
+                                        <rect key="frame" x="31.5" y="54.5" width="62.5" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
