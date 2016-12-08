@@ -8,7 +8,7 @@
 import SpriteKit
 
 /// Constants for colors used by UI elements in the application.
-struct Color {
+enum Color {
     /// Color of the lander.
     static let lander = SKColor.orange
 

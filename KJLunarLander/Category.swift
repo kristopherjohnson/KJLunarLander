@@ -9,7 +9,7 @@
 ///
 /// Values defined here are assigned to the `SKSpriteNode`
 /// `categoryBitMask` property.
-struct Category {
+enum Category {
     /// Player's lander
     static let lander  = UInt32(1 << 0)
 

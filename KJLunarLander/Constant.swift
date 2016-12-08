@@ -12,7 +12,7 @@ import CoreGraphics
 /// All lengths are in meters.  All masses are in kilograms.
 /// All times are in seconds.
 
-struct Constant {
+enum Constant {
 
     /// Acceleration due to lunar gravity (m/s/s).
     static let lunarGravity: CGFloat = -1.62519
