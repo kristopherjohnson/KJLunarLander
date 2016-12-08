@@ -24,3 +24,11 @@ extension CGPoint {
         return CGPoint(x: self.x - dx, y: self.y)
     }
 }
+
+extension Comparable {
+
+    /// Return value clamped to specified range.
+    func clamped(to range: ClosedRange<Self>) -> Self {
+        return min(max(self, range.lowerBound), range.upperBound)
+    }
+}

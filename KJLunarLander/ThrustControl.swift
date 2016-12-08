@@ -84,7 +84,7 @@ class ThrustControl: UIControl {
         let bounds = self.bounds
 
         let rawValue = (bounds.maxY - point.y) / bounds.size.height
-        let clampedValue = min(1.0, max(0.0, rawValue))
+        let clampedValue = rawValue.clamped(to: 0.0...1.0)
 
         if clampedValue != value {
             value = clampedValue
