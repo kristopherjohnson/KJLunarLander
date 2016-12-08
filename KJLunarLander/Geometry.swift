@@ -8,6 +8,7 @@
 import CoreGraphics
 
 extension CGRect {
+    
     /// Get the center point.
     ///
     /// - returns: `CGPoint`

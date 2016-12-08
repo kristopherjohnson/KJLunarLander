@@ -93,7 +93,8 @@ extension LanderSceneController: SKSceneDelegate {
         }
 
         if (currentTime - lastHUDUpdateTime) > 0.1 {
-            hud.updateDisplayValues(lander: lander, thrust: controlInput.thrustInput)
+            hud.updateDisplayValues(lander: lander,
+                                    thrust: controlInput.thrustInput)
             lastHUDUpdateTime = currentTime
         }
     }

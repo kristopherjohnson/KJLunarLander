@@ -10,12 +10,12 @@ import UIKit
 /// The thrust control is a vertical rectangle that reacts to touches.
 /// When untouched, the control is unhighlighted and its value is 0.0.
 /// When touched, the value will be the fraction of the distance from
-/// the bottom of the control to the top of the control that the
-/// touch point is at, and a highlight will appear to indicate the level.
+/// the bottom of the control to the top of the control where the
+/// touch point is, and a highlight appears to indicate the level.
 
 class ThrustControl: UIControl {
 
-    /// Current thrust level, in the range 0.0-1.0.
+    /// Current thrust level, in the range 0.0...1.0.
     var value: CGFloat = 0.0
 
     /// Sublayer that displays current thrust level.
@@ -83,11 +83,11 @@ class ThrustControl: UIControl {
         let point = touch.location(in: self)
         let bounds = self.bounds
 
-        let rawValue = (bounds.maxY - point.y) / bounds.size.height
-        let clampedValue = rawValue.clamped(to: 0.0...1.0)
+        let newValue = ((bounds.maxY - point.y) / bounds.size.height)
+            .clamped(to: 0.0...1.0)
 
-        if clampedValue != value {
-            value = clampedValue
+        if newValue != value {
+            value = newValue
             updateHighlightLayer()
             sendActions(for: .valueChanged)
         }
