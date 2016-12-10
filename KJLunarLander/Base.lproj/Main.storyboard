@@ -54,22 +54,37 @@
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rotation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKI-Wf-F9r">
-                                        <rect key="frame" x="22.5" y="90.5" width="80.5" height="17.5"/>
+                                        <rect key="frame" x="22" y="90" width="81" height="18"/>
                                         <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxp-PY-nNS">
+                                        <rect key="frame" x="8" y="8" width="108" height="30"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
+                                        <state key="normal" title="Reset">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resetWasTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="Tg2-ye-vPA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="pKI-Wf-F9r" firstAttribute="centerX" secondItem="Mp5-1b-WaO" secondAttribute="centerX" id="1gh-0e-Ds5"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="centerY" secondItem="Mp5-1b-WaO" secondAttribute="centerY" id="2T6-IJ-vT5"/>
                                     <constraint firstItem="bDq-zq-eQP" firstAttribute="centerY" secondItem="Mp5-1b-WaO" secondAttribute="centerY" id="3Cf-Po-Dxt"/>
+                                    <constraint firstItem="xxp-PY-nNS" firstAttribute="top" secondItem="Mp5-1b-WaO" secondAttribute="top" constant="8" id="77E-Rs-qmv"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="height" secondItem="bDq-zq-eQP" secondAttribute="height" id="Igf-Dy-DqS"/>
+                                    <constraint firstAttribute="trailing" secondItem="xxp-PY-nNS" secondAttribute="trailing" constant="8" id="Vqu-BX-Gm4"/>
+                                    <constraint firstItem="xxp-PY-nNS" firstAttribute="centerX" secondItem="Mp5-1b-WaO" secondAttribute="centerX" id="X9Q-Dz-iDI"/>
                                     <constraint firstAttribute="trailing" secondItem="bDq-zq-eQP" secondAttribute="trailing" constant="8" id="a6d-o0-mBA"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="leading" secondItem="Mp5-1b-WaO" secondAttribute="leading" constant="8" id="b4h-cM-XV2"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="width" secondItem="bDq-zq-eQP" secondAttribute="width" id="d5k-Fp-i7K"/>
                                     <constraint firstItem="R1z-9h-Jpj" firstAttribute="top" secondItem="pKI-Wf-F9r" secondAttribute="bottom" constant="8" id="d9H-Os-rot"/>
+                                    <constraint firstItem="xxp-PY-nNS" firstAttribute="leading" secondItem="Mp5-1b-WaO" secondAttribute="leading" constant="8" id="mHd-zN-HGC"/>
                                     <constraint firstItem="bDq-zq-eQP" firstAttribute="leading" secondItem="R1z-9h-Jpj" secondAttribute="trailing" constant="4" id="qMM-vU-cZl"/>
                                 </constraints>
                             </view>
@@ -77,7 +92,7 @@
                                 <rect key="frame" x="444" y="0.0" width="124" height="320"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thrust" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg6-ZY-irE">
-                                        <rect key="frame" x="31.5" y="54.5" width="62.5" height="17.5"/>
+                                        <rect key="frame" x="31" y="54" width="63" height="18"/>
                                         <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>

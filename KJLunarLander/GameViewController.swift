@@ -38,6 +38,11 @@ class GameViewController: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+
+    @IBAction func resetWasTapped(_ sender: UIButton) {
+        landerSceneController = LanderSceneController(view: skView)
+        landerSceneController!.controlInput = self
+    }
 }
 
 // MARK: - ControlInput

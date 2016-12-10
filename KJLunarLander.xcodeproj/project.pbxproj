@@ -109,7 +109,6 @@
 		4ED5CF291DE919A200D2BD01 /* KJLunarLander */ = {
 			isa = PBXGroup;
 			children = (
-				4E8834281DFC384F00A3F92A /* Fonts */,
 				4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */,
 				4ED5CF371DE919A200D2BD01 /* Assets.xcassets */,
 				4E0DFD9F1DF3CC5D00A8A24F /* Category.swift */,
@@ -117,6 +116,7 @@
 				4E0DFDA31DF3D38A00A8A24F /* Constant.swift */,
 				4E0DFDA91DF4A34900A8A24F /* ControlButton.swift */,
 				4E0DFDA51DF3D5F400A8A24F /* ControlInput.swift */,
+				4E8834281DFC384F00A3F92A /* Fonts */,
 				4ED5CF321DE919A200D2BD01 /* GameViewController.swift */,
 				4E0DFDA11DF3CFE100A8A24F /* Geometry.swift */,
 				4E0DFDAB1DF4C3A500A8A24F /* HUD.swift */,
