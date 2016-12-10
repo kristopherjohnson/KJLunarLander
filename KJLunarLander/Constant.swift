@@ -31,12 +31,12 @@ enum Constant {
     /// Torque applied by full rotation.
     ///
     /// Not historically accurate.
-    static let landerTorque: CGFloat = 100
+    static let landerTorque: CGFloat = 50
 
     /// Scene is 600m wide by 600m high.
-    static let sceneSize = CGSize(width: 600, height: 600)
+    static let sceneSize = CGSize(width: 320, height: 320)
 
     /// Initial position of lander in scene.
     static let landerInitialPosition = CGPoint(x: sceneSize.width / 2,
-                                               y: sceneSize.height * 0.9)
+                                               y: sceneSize.height * 0.8)
 }

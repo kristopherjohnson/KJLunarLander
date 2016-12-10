@@ -13,7 +13,7 @@ class HUD: SKNode {
     static let spriteName = "hud"
 
     private static let fontName = "Orbitron-Light"
-    private static let fontSize: CGFloat = 20
+    private static let fontSize: CGFloat = 10
 
     private static let linePitch: CGFloat = 12
 
