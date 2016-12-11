@@ -15,7 +15,7 @@ class HUD: SKNode {
     private static let fontName = "Orbitron-Light"
     private static let fontSize: CGFloat = 10
 
-    private static let linePitch: CGFloat = 12
+    private static let linePitch: CGFloat = 32
 
     private var altitude: SKLabelNode!
     private var horizontalSpeed: SKLabelNode!
@@ -31,14 +31,16 @@ class HUD: SKNode {
 
         name = HUD.spriteName
 
+        self.position = CGPoint()
         parent.addChild(self)
 
         if let skView = self.scene?.view {
             let upperRightCorner = CGPoint(x: skView.frame.size.width,
                                            y: 0)
-
-            var nextPosition = CGPoint(x: upperRightCorner.x - 50,
-                                       y: upperRightCorner.y + 12)
+            print("upperRightCorner: \(upperRightCorner)")
+            var nextPosition = CGPoint(x: upperRightCorner.x - 100,
+                                       y: upperRightCorner.y + HUD.linePitch)
+            print("nextPosition: \(nextPosition)")
 
             altitude = makeValueNode()
             addNodes(valueNode: altitude,
@@ -46,6 +48,7 @@ class HUD: SKNode {
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
+            print("nextPosition: \(nextPosition)")
 
             horizontalSpeed = makeValueNode()
             addNodes(valueNode: horizontalSpeed,
@@ -53,6 +56,7 @@ class HUD: SKNode {
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
+            print("nextPosition: \(nextPosition)")
 
             verticalSpeed = makeValueNode()
             addNodes(valueNode: verticalSpeed,
@@ -60,6 +64,7 @@ class HUD: SKNode {
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
+            print("nextPosition: \(nextPosition)")
 
             thrust = makeValueNode()
             addNodes(valueNode: thrust,

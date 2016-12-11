@@ -15,13 +15,13 @@ class LanderSceneController: NSObject {
 
     fileprivate let lander: LanderSprite
     fileprivate let surface: SurfaceSprite
-    fileprivate let hud: HUD
+    fileprivate var hud: HUD?
 
     fileprivate var lastHUDUpdateTime: TimeInterval = 0
 
     weak var controlInput: ControlInput?
     
-    public init(view: SKView) {
+    init(view: SKView) {
         self.view = view
 
         scene = SKScene(size: Constant.sceneSize)
@@ -60,6 +60,13 @@ class LanderSceneController: NSObject {
         scene.delegate = self
         scene.physicsWorld.contactDelegate = self
     }
+
+    func viewDidLayoutSubviews() {
+        if hud != nil {
+            scene.removeChildren(in: [hud!])
+        }
+        hud = HUD(parent: scene)
+    }
 }
 
 // MARK: - SKSceneDelegate
@@ -93,8 +100,8 @@ extension LanderSceneController: SKSceneDelegate {
         }
 
         if (currentTime - lastHUDUpdateTime) > 0.1 {
-            hud.updateDisplayValues(lander: lander,
-                                    thrust: controlInput.thrustInput)
+            hud?.updateDisplayValues(lander: lander,
+                                     thrust: controlInput.thrustInput)
             lastHUDUpdateTime = currentTime
         }
     }

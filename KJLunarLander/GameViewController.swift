@@ -27,8 +27,13 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        landerSceneController = LanderSceneController(view: skView)
-        landerSceneController!.controlInput = self
+        makeLanderSceneController()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        landerSceneController?.viewDidLayoutSubviews()
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -40,6 +45,10 @@ class GameViewController: UIViewController {
     }
 
     @IBAction func resetWasTapped(_ sender: UIButton) {
+        makeLanderSceneController()
+    }
+
+    private func makeLanderSceneController() {
         landerSceneController = LanderSceneController(view: skView)
         landerSceneController!.controlInput = self
     }
