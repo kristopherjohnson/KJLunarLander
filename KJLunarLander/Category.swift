@@ -18,4 +18,7 @@ enum Category {
 
     /// Landing target
     static let target  = UInt32(1 << 2)
+
+    /// Lander foot
+    static let foot    = UInt32(1 << 3)
 }

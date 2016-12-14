@@ -26,6 +26,7 @@ class SurfaceSprite: SKSpriteNode {
         body.categoryBitMask = Category.surface
         body.contactTestBitMask = Category.lander
         body.collisionBitMask = Category.lander
+        body.friction = Constant.surfaceFriction
 
         physicsBody = body
     }

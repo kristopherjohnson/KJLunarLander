@@ -51,9 +51,8 @@ class LanderSceneController: NSObject {
                                    y: surface.size.height / 2)
         scene.addChild(surface)
 
-        lander = LanderSprite()
-        lander.position = Constant.landerInitialPosition
-        scene.addChild(lander)
+        lander = LanderSprite.sprite(scene: scene,
+                                     position: Constant.landerInitialPosition)
 
         super.init()
 
