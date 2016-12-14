@@ -37,10 +37,8 @@ class HUD: SKNode {
         if let skView = self.scene?.view {
             let upperRightCorner = CGPoint(x: skView.frame.size.width,
                                            y: 0)
-            print("upperRightCorner: \(upperRightCorner)")
             var nextPosition = CGPoint(x: upperRightCorner.x - 100,
                                        y: upperRightCorner.y + HUD.linePitch)
-            print("nextPosition: \(nextPosition)")
 
             altitude = makeValueNode()
             addNodes(valueNode: altitude,
@@ -48,7 +46,6 @@ class HUD: SKNode {
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
-            print("nextPosition: \(nextPosition)")
 
             horizontalSpeed = makeValueNode()
             addNodes(valueNode: horizontalSpeed,
@@ -56,7 +53,6 @@ class HUD: SKNode {
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
-            print("nextPosition: \(nextPosition)")
 
             verticalSpeed = makeValueNode()
             addNodes(valueNode: verticalSpeed,
@@ -64,7 +60,6 @@ class HUD: SKNode {
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
-            print("nextPosition: \(nextPosition)")
 
             thrust = makeValueNode()
             addNodes(valueNode: thrust,
