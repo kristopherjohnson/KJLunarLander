@@ -12,7 +12,8 @@ import SpriteKit
 /// The lander sprite's main body consists of the
 /// descent stage at the bottom.  The ascent stage
 /// and lander feet are separate sprites, attached
-/// to the main body.
+/// to the main body.  The lander also has a
+/// particle emitter for rocket thrust.
 
 class LanderSprite: SKSpriteNode {
     /// Name used for all instances of `HeroSprite`.
@@ -22,6 +23,31 @@ class LanderSprite: SKSpriteNode {
     private var leftFoot: SKSpriteNode?
     private var rightFoot: SKSpriteNode?
 
+    private var thrustEmitter: SKEmitterNode?
+    private var thrustMaxParticleLifetime: CGFloat = 0.0
+    private var thrustMaxParticleScale: CGFloat = 0.0
+    private var thrustMaxParticleBirthRate: CGFloat = 0.0
+    private var thrustMaxParticleSpeed: CGFloat = 0.0
+
+    /// Lander's thrust level.
+    ///
+    /// When set, adjusts the parameters of the thrust emitter
+    /// to indicate thrust level.
+    var thrustLevel: CGFloat = 0.0 {
+        didSet {
+            if let thrustEmitter = thrustEmitter {
+                if thrustLevel > 0.0 {
+                    thrustEmitter.particleBirthRate = thrustLevel * thrustMaxParticleBirthRate
+                    thrustEmitter.particleScale = thrustLevel * thrustMaxParticleScale
+                    thrustEmitter.particleLifetime = thrustLevel * thrustMaxParticleLifetime
+                    thrustEmitter.particleSpeed = thrustLevel * thrustMaxParticleSpeed
+                }
+                else {
+                    thrustEmitter.particleBirthRate = 0
+                }
+            }
+        }
+    }
     /// Create a sprite for the lander at the specified position in the scene.
     ///
     /// This also creates the sprites attached to the main hull.
@@ -33,16 +59,19 @@ class LanderSprite: SKSpriteNode {
         lander.position = position
         scene.addChild(lander)
 
+        let landerHeight = lander.size.height
+        let landerHalfHeight = landerHeight / 2
+
         // Create and attach ascent-stage hull to the top.
 
         let ascentHull = makeAscentHullSprite()
         lander.ascentHull = ascentHull
         ascentHull.position = CGPoint(x: position.x,
-                                      y: position.y + lander.size.height / 2 + ascentHull.size.height / 2)
+                                      y: position.y + landerHalfHeight + ascentHull.size.height / 2)
         scene.addChild(ascentHull)
 
         let ascentHullConnectPoint = CGPoint(x: position.x,
-                                             y: position.y + lander.size.height / 2)
+                                             y: position.y + landerHalfHeight)
         let ascentHullJoint = SKPhysicsJointFixed.joint(withBodyA: lander.physicsBody!,
                                                         bodyB: ascentHull.physicsBody!,
                                                         anchor: ascentHullConnectPoint)
@@ -66,13 +95,29 @@ class LanderSprite: SKSpriteNode {
         let rightFoot = makeFootSprite()
         lander.rightFoot = leftFoot
         rightFoot.position = CGPoint(x: position.x + Constant.landerSize.width / 2 + Constant.footSize.width / 2,
-                                    y: position.y - Constant.legHeight - Constant.footSize.height / 2)
+                                     y: position.y - Constant.legHeight - Constant.footSize.height / 2)
         scene.addChild(rightFoot)
 
         let rightFootJoint = SKPhysicsJointFixed.joint(withBodyA: lander.physicsBody!,
                                                        bodyB: rightFoot.physicsBody!,
                                                        anchor: rightFoot.position)
         scene.physicsWorld.add(rightFootJoint)
+
+        // Create and attach the thrust particle emitter.
+
+        if let thrustEmitter = makeThrustEmitter() {
+            lander.thrustEmitter = thrustEmitter
+
+            lander.thrustMaxParticleLifetime = thrustEmitter.particleLifetime
+            lander.thrustMaxParticleScale = thrustEmitter.particleScale
+            lander.thrustMaxParticleBirthRate = thrustEmitter.particleBirthRate
+            lander.thrustMaxParticleSpeed = thrustEmitter.particleSpeed
+
+            thrustEmitter.particleBirthRate = 0
+
+            thrustEmitter.position = CGPoint(x: 0, y: -landerHeight)
+            lander.addChild(thrustEmitter)
+        }
 
         return lander
     }
@@ -142,5 +187,22 @@ class LanderSprite: SKSpriteNode {
         body.collisionBitMask = Category.surface
         
         return foot
+    }
+
+    private class func makeThrustEmitter() -> SKEmitterNode? {
+        if let path = Bundle.main.path(forResource: "ThrustParticle",
+                                       ofType: "sks") {
+            if let emitter = NSKeyedUnarchiver.unarchiveObject(withFile: path) as? SKEmitterNode {
+                return emitter
+            }
+            else {
+                NSLog("Unable to unarchive ThrustParticle.sks")
+            }
+        }
+        else {
+            NSLog("Unable to find ThrustParticlePath.sks")
+        }
+
+        return nil
     }
 }

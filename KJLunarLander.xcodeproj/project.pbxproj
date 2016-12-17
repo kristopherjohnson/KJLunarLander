@@ -17,6 +17,7 @@
 		4E0DFDAA1DF4A34900A8A24F /* ControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DFDA91DF4A34900A8A24F /* ControlButton.swift */; };
 		4E0DFDAC1DF4C3A500A8A24F /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E0DFDAB1DF4C3A500A8A24F /* HUD.swift */; };
 		4E27D3E51DFC3EE90075B8BE /* Orbitron Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E27D3E41DFC3EE90075B8BE /* Orbitron Light.otf */; };
+		4EBF7C521E04C7CE00751DFF /* ThrustParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4EBF7C511E04C7CE00751DFF /* ThrustParticle.sks */; };
 		4ED5CF2B1DE919A200D2BD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */; };
 		4ED5CF331DE919A200D2BD01 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF321DE919A200D2BD01 /* GameViewController.swift */; };
 		4ED5CF361DE919A200D2BD01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5CF341DE919A200D2BD01 /* Main.storyboard */; };
@@ -48,6 +49,7 @@
 		4E0DFDA91DF4A34900A8A24F /* ControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlButton.swift; sourceTree = "<group>"; };
 		4E0DFDAB1DF4C3A500A8A24F /* HUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		4E27D3E41DFC3EE90075B8BE /* Orbitron Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Orbitron Light.otf"; path = "Fonts/Orbitron/Orbitron Light.otf"; sourceTree = SOURCE_ROOT; };
+		4EBF7C511E04C7CE00751DFF /* ThrustParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ThrustParticle.sks; sourceTree = "<group>"; };
 		4ED5CF271DE919A200D2BD01 /* KJLunarLander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KJLunarLander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4ED5CF321DE919A200D2BD01 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				4ED5CF341DE919A200D2BD01 /* Main.storyboard */,
 				4E0DFDA71DF45CF100A8A24F /* SurfaceSprite.swift */,
 				4EFA3CC41DF8EA9200319494 /* ThrustControl.swift */,
+				4EBF7C511E04C7CE00751DFF /* ThrustParticle.sks */,
 			);
 			path = KJLunarLander;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				4ED5CF361DE919A200D2BD01 /* Main.storyboard in Resources */,
 				4ED5CF381DE919A200D2BD01 /* Assets.xcassets in Resources */,
 				4ED5CF3B1DE919A200D2BD01 /* LaunchScreen.storyboard in Resources */,
+				4EBF7C521E04C7CE00751DFF /* ThrustParticle.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

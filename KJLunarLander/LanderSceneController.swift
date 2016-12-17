@@ -71,6 +71,9 @@ class LanderSceneController: NSObject {
 // MARK: - SKSceneDelegate
 extension LanderSceneController: SKSceneDelegate {
     public func update(_ currentTime: TimeInterval, for scene: SKScene) {
+        guard let controlInput = controlInput else { return }
+        guard let landerBody = lander.physicsBody else { return }
+
         // If lander goes off left or right edge, wrap around to opposite edge.
         let sceneWidth = scene.size.width
         while lander.position.x > sceneWidth {
@@ -82,10 +85,9 @@ extension LanderSceneController: SKSceneDelegate {
 
         // Apply control inputs
         
-        guard let controlInput = controlInput else { return }
-        guard let landerBody = lander.physicsBody else { return }
-
-        if controlInput.thrustInput != 0 {
+        let thrustLevel = controlInput.thrustInput
+        lander.thrustLevel = thrustLevel
+        if thrustLevel > 0 {
             let thrustForce = controlInput.thrustInput * Constant.landerThrust
             let thrustDirection = Float(lander.zRotation) + Float(M_PI_2)
             let thrustVector = CGVector(dx: thrustForce * CGFloat(cosf(thrustDirection)),
@@ -98,10 +100,11 @@ extension LanderSceneController: SKSceneDelegate {
             landerBody.applyTorque(torque)
         }
 
-        if (currentTime - lastHUDUpdateTime) > 0.1 {
-            hud?.updateDisplayValues(lander: lander,
-                                     thrust: controlInput.thrustInput)
-            lastHUDUpdateTime = currentTime
+        if let hud = hud {
+            if (currentTime - lastHUDUpdateTime) > 0.1 {
+                hud.updateDisplayValues(lander: lander)
+                lastHUDUpdateTime = currentTime
+            }
         }
     }
 

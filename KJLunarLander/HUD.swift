@@ -69,7 +69,7 @@ class HUD: SKNode {
     }
 
     /// Update the values displayed in the HUD
-    func updateDisplayValues(lander: LanderSprite, thrust thrustValue: CGFloat) {
+    func updateDisplayValues(lander: LanderSprite) {
         // TODO: subtract surface altitude and 1/2 lander height
         altitude.text = format(value: lander.position.y - 34)
 
@@ -79,7 +79,7 @@ class HUD: SKNode {
             verticalSpeed.text = format(value: body.velocity.dy)
         }
 
-        thrust.text = format(value: thrustValue * 100)
+        thrust.text = format(value: lander.thrustLevel * 100)
     }
 
     /// Format a value for display in the HUD
