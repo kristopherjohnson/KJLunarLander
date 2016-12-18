@@ -8,6 +8,37 @@
 import CoreGraphics
 import SpriteKit
 
+/// pi as CGFloat
+let pi = CGFloat(M_PI)
+
+/// pi/2 as CGFloat
+let pi2 = CGFloat(M_PI_2)
+
+/// pi/4 as CGFloat
+let pi4 = CGFloat(M_PI_4)
+
+/// Calculate cosine for a CGFloat angle.
+func cos(_ radians: CGFloat) -> CGFloat {
+    return CGFloat(cos(Double(radians)))
+}
+
+/// Calculate sine for a CGFloat angle.
+func sin(_ radians: CGFloat) -> CGFloat {
+    return CGFloat(sin(Double(radians)))
+}
+
+extension CGVector {
+    
+    /// Construct CGVector from angle and magnitude.
+    ///
+    /// - parameter angle: Angle in radians.
+    /// - parameter length: Magnitude.
+    init(angle: CGFloat, length: CGFloat) {
+        self.init(dx: cos(angle) * length,
+                  dy: sin(angle) * length)
+    }
+}
+
 extension CGRect {
     
     /// Get the center point of a CGRect.

@@ -91,9 +91,8 @@ extension LanderSceneController: SKSceneDelegate {
         lander.thrustLevel = thrustLevel
         if thrustLevel > 0 {
             let thrustForce = controlInput.thrustInput * Constant.landerThrust
-            let thrustDirection = Float(lander.zRotation) + Float(M_PI_2)
-            let thrustVector = CGVector(dx: thrustForce * CGFloat(cosf(thrustDirection)),
-                                        dy: thrustForce * CGFloat(sinf(thrustDirection)))
+            let thrustDirection = lander.zRotation + pi2
+            let thrustVector = CGVector(angle: thrustDirection, length: thrustForce)
             landerBody.applyForce(thrustVector)
         }
 
@@ -103,7 +102,7 @@ extension LanderSceneController: SKSceneDelegate {
         }
 
         // Update HUD.
-        
+
         if let hud = hud {
             if (currentTime - lastHUDUpdateTime) > 0.1 {
                 hud.updateDisplayValues(lander: lander)
