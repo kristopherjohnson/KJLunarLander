@@ -75,15 +75,17 @@ extension LanderSceneController: SKSceneDelegate {
         guard let landerBody = lander.physicsBody else { return }
 
         // If lander goes off left or right edge, wrap around to opposite edge.
+
         let sceneWidth = scene.size.width
-        while lander.position.x > sceneWidth {
-            lander.position.x -= sceneWidth
+        let landerX = lander.position.x
+        if landerX < 0 {
+            lander.wraparoundX(to: sceneWidth - 1)
         }
-        while lander.position.x < 0 {
-            lander.position.x += sceneWidth
+        else if landerX > sceneWidth {
+            lander.wraparoundX(to: 1)
         }
 
-        // Apply control inputs
+        // Apply control inputs.
         
         let thrustLevel = controlInput.thrustInput
         lander.thrustLevel = thrustLevel
@@ -100,6 +102,8 @@ extension LanderSceneController: SKSceneDelegate {
             landerBody.applyTorque(torque)
         }
 
+        // Update HUD.
+        
         if let hud = hud {
             if (currentTime - lastHUDUpdateTime) > 0.1 {
                 hud.updateDisplayValues(lander: lander)
@@ -121,7 +125,7 @@ extension LanderSceneController: SKSceneDelegate {
     }
 
     public func didFinishUpdate(for scene: SKScene) {
-        
+
     }
 }
 

@@ -20,8 +20,13 @@ class LanderSprite: SKSpriteNode {
     static let spriteName = "lander"
 
     private var ascentHull: SKSpriteNode?
+    private var ascentHullJoint: SKPhysicsJointFixed?
+
     private var leftFoot: SKSpriteNode?
+    private var leftFootJoint: SKPhysicsJointFixed?
+
     private var rightFoot: SKSpriteNode?
+    private var rightFootJoint: SKPhysicsJointFixed?
 
     private var thrustEmitter: SKEmitterNode?
     private var thrustMaxParticleLifetime: CGFloat = 0.0
@@ -31,8 +36,7 @@ class LanderSprite: SKSpriteNode {
 
     /// Lander's thrust level.
     ///
-    /// When set, adjusts the parameters of the thrust emitter
-    /// to indicate thrust level.
+    /// When set, adjusts the parameters of the thrust emitter.
     var thrustLevel: CGFloat = 0.0 {
         didSet {
             if let thrustEmitter = thrustEmitter {
@@ -69,13 +73,7 @@ class LanderSprite: SKSpriteNode {
         ascentHull.position = CGPoint(x: position.x,
                                       y: position.y + landerHalfHeight + ascentHull.size.height / 2)
         scene.addChild(ascentHull)
-
-        let ascentHullConnectPoint = CGPoint(x: position.x,
-                                             y: position.y + landerHalfHeight)
-        let ascentHullJoint = SKPhysicsJointFixed.joint(withBodyA: lander.physicsBody!,
-                                                        bodyB: ascentHull.physicsBody!,
-                                                        anchor: ascentHullConnectPoint)
-        scene.physicsWorld.add(ascentHullJoint)
+        lander.ascentHullJoint = addFixedJoint(lander, ascentHull, toScene: scene)
 
         // Create and attach the left foot.
 
@@ -84,24 +82,16 @@ class LanderSprite: SKSpriteNode {
         leftFoot.position = CGPoint(x: position.x - Constant.landerSize.width / 2 - Constant.footSize.width / 2,
                                     y: position.y - Constant.legHeight - Constant.footSize.height / 2)
         scene.addChild(leftFoot)
-
-        let leftFootJoint = SKPhysicsJointFixed.joint(withBodyA: lander.physicsBody!,
-                                                      bodyB: leftFoot.physicsBody!,
-                                                      anchor: leftFoot.position)
-        scene.physicsWorld.add(leftFootJoint)
+        lander.leftFootJoint = addFixedJoint(lander, leftFoot, toScene: scene)
 
         // Create and attach the right foot.
         
         let rightFoot = makeFootSprite()
-        lander.rightFoot = leftFoot
+        lander.rightFoot = rightFoot
         rightFoot.position = CGPoint(x: position.x + Constant.landerSize.width / 2 + Constant.footSize.width / 2,
                                      y: position.y - Constant.legHeight - Constant.footSize.height / 2)
         scene.addChild(rightFoot)
-
-        let rightFootJoint = SKPhysicsJointFixed.joint(withBodyA: lander.physicsBody!,
-                                                       bodyB: rightFoot.physicsBody!,
-                                                       anchor: rightFoot.position)
-        scene.physicsWorld.add(rightFootJoint)
+        lander.rightFootJoint = addFixedJoint(lander, rightFoot, toScene: scene)
 
         // Create and attach the thrust particle emitter.
 
@@ -120,6 +110,15 @@ class LanderSprite: SKSpriteNode {
         }
 
         return lander
+    }
+
+    /// Instantaneously move the lander to a new X coordinate.
+    func wraparoundX(to newX: CGFloat) {
+        let dx = newX - position.x
+        self.moveRight(by: dx)
+        ascentHull?.moveRight(by: dx)
+        leftFoot?.moveRight(by: dx)
+        rightFoot?.moveRight(by: dx)
     }
 
     private convenience init() {
@@ -187,6 +186,24 @@ class LanderSprite: SKSpriteNode {
         body.collisionBitMask = Category.surface
         
         return foot
+    }
+
+    /// Create a new fixed joint and add it to the scene's physics world.
+    ///
+    /// Has no effect if nodeA or nodeB has no physics body.
+    ///
+    /// - parameter nodeA: A node.
+    /// - parameter nodeB: Another node.
+    /// - parameter scene: The SKScene to which the joint is to be added.
+    ///
+    /// - returns: The newly created SKPhysicsJoint, or nil if either node has no physicsBody.
+    private class func addFixedJoint(_ nodeA: SKNode, _ nodeB: SKNode, toScene scene: SKScene) -> SKPhysicsJointFixed? {
+        guard let bodyA = nodeA.physicsBody else { return nil }
+        guard let bodyB = nodeB.physicsBody else { return nil }
+        let anchor = nodeB.position
+        let joint = SKPhysicsJointFixed.joint(withBodyA: bodyA, bodyB: bodyB, anchor: anchor)
+        scene.physicsWorld.add(joint)
+        return joint
     }
 
     private class func makeThrustEmitter() -> SKEmitterNode? {
