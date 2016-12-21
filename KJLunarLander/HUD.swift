@@ -42,21 +42,24 @@ class HUD: SKNode {
 
             altitude = makeValueNode()
             addNodes(valueNode: altitude,
-                     labelText: "Altitude",
+                     labelText: NSLocalizedString("Altitude",
+                                                  comment: "Altitude"),
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
 
             horizontalSpeed = makeValueNode()
             addNodes(valueNode: horizontalSpeed,
-                     labelText: "Horizontal Speed",
+                     labelText: NSLocalizedString("Horizontal Speed",
+                                                  comment: "Horizontal Speed"),
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
 
             verticalSpeed = makeValueNode()
             addNodes(valueNode: verticalSpeed,
-                     labelText: "Vertical Speed",
+                     labelText: NSLocalizedString("Vertical Speed",
+                                                  comment: "Vertical Speed"),
                      viewPosition: nextPosition)
 
             nextPosition.y += HUD.linePitch
