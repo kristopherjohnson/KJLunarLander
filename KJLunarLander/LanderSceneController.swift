@@ -35,6 +35,7 @@ class LanderSceneController: NSObject {
 
         view.ignoresSiblingOrder = true
 
+        // Show SpriteKit diagnostics
         if true {
             view.showsFPS = true
             view.showsDrawCount = true
@@ -61,9 +62,8 @@ class LanderSceneController: NSObject {
     }
 
     func viewDidLayoutSubviews() {
-        if hud != nil {
-            scene.removeChildren(in: [hud!])
-        }
+        // Recreate the HUD
+        hud?.removeFromParent()
         hud = HUD(parent: scene)
     }
 }
