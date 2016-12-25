@@ -55,12 +55,13 @@ class LanderSprite: SKSpriteNode {
     /// Create a sprite for the lander at the specified position in the scene.
     ///
     /// This also creates the sprites attached to the main hull.
-    class func sprite(scene: SKScene, position: CGPoint) -> LanderSprite {
+    class func sprite(scene: SKScene, position: CGPoint, velocity: CGVector) -> LanderSprite {
 
         // Create the main body
 
         let lander = LanderSprite()
         lander.position = position
+        lander.physicsBody?.velocity = velocity
         scene.addChild(lander)
 
         let landerHeight = lander.size.height
@@ -72,6 +73,7 @@ class LanderSprite: SKSpriteNode {
         lander.ascentHull = ascentHull
         ascentHull.position = CGPoint(x: position.x,
                                       y: position.y + landerHalfHeight + ascentHull.size.height / 2)
+        ascentHull.physicsBody?.velocity = velocity
         scene.addChild(ascentHull)
         lander.ascentHullJoint = addFixedJoint(lander, ascentHull, toScene: scene)
 
@@ -81,6 +83,7 @@ class LanderSprite: SKSpriteNode {
         lander.leftFoot = leftFoot
         leftFoot.position = CGPoint(x: position.x - Constant.landerSize.width / 2 - Constant.footSize.width / 2,
                                     y: position.y - Constant.legHeight - Constant.footSize.height / 2)
+        leftFoot.physicsBody?.velocity = velocity
         scene.addChild(leftFoot)
         lander.leftFootJoint = addFixedJoint(lander, leftFoot, toScene: scene)
 
@@ -90,6 +93,7 @@ class LanderSprite: SKSpriteNode {
         lander.rightFoot = rightFoot
         rightFoot.position = CGPoint(x: position.x + Constant.landerSize.width / 2 + Constant.footSize.width / 2,
                                      y: position.y - Constant.legHeight - Constant.footSize.height / 2)
+        rightFoot.physicsBody?.velocity = velocity
         scene.addChild(rightFoot)
         lander.rightFootJoint = addFixedJoint(lander, rightFoot, toScene: scene)
 

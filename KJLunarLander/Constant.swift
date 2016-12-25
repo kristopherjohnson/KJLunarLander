@@ -45,9 +45,12 @@ enum Constant {
     static let sceneSize = CGSize(width: 320, height: 320)
 
     /// Initial position of lander in scene.
-    static let landerInitialPosition = CGPoint(x: sceneSize.width / 2,
+    static let landerInitialPosition = CGPoint(x: sceneSize.width / 8,
                                                y: sceneSize.height * 0.8)
 
+    /// Initial velocity of lander in scene.
+    static let landerInitialVelocity = CGVector(dx: 50, dy: 0)
+    
     /// Roughness of the lunar surface.
     /// 
     /// Set to a high value, so lander will tend to flip rather than slide

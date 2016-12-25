@@ -10,8 +10,17 @@ import SpriteKit
 /// Implements the lander game.
 
 class LanderSceneController: NSObject {
+    fileprivate enum State {
+        case start
+        case inProgress
+        case landed
+        case destroyed
+    }
+
     private let view: SKView
     private let scene: SKScene
+
+    fileprivate var state = State.start
 
     fileprivate let lander: LanderSprite
     fileprivate let surface: SurfaceSprite
@@ -28,8 +37,7 @@ class LanderSceneController: NSObject {
         scene.backgroundColor = .black
         scene.scaleMode = .aspectFit
 
-        scene.physicsWorld.gravity = CGVector(dx: 0,
-                                              dy: Constant.lunarGravity)
+        scene.physicsWorld.gravity = CGVector.zero
 
         view.presentScene(scene)
 
@@ -53,7 +61,8 @@ class LanderSceneController: NSObject {
         scene.addChild(surface)
 
         lander = LanderSprite.sprite(scene: scene,
-                                     position: Constant.landerInitialPosition)
+                                     position: Constant.landerInitialPosition,
+                                     velocity: Constant.landerInitialVelocity)
 
         super.init()
 
@@ -108,6 +117,19 @@ extension LanderSceneController: SKSceneDelegate {
                 hud.updateDisplayValues(lander: lander)
                 lastHUDUpdateTime = currentTime
             }
+        }
+
+        // State-specific handling
+
+        switch state {
+        case .start:
+            if thrustLevel > 0.0 {
+                scene.physicsWorld.gravity = CGVector(dx: 0, dy: Constant.lunarGravity)
+                state = .inProgress
+            }
+
+        default:
+            break
         }
     }
 
