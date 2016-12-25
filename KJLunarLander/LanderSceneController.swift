@@ -49,8 +49,8 @@ class LanderSceneController: NSObject {
             view.showsDrawCount = true
             view.showsNodeCount = true
             view.showsQuadCount = true
-            view.showsPhysics = true
-            view.showsFields = true
+            //view.showsPhysics = true
+            //view.showsFields = true
         }
 
         hud = HUD(parent: scene)
@@ -58,6 +58,7 @@ class LanderSceneController: NSObject {
         surface = SurfaceSprite()
         surface.position = CGPoint(x: surface.size.width / 2,
                                    y: surface.size.height / 2)
+        surface.zPosition = ZPosition.surface
         scene.addChild(surface)
 
         lander = LanderSprite.sprite(scene: scene,

@@ -19,7 +19,7 @@ class LanderSprite: SKSpriteNode {
     /// Name used for all instances of `HeroSprite`.
     static let spriteName = "lander"
 
-    private var ascentHull: SKSpriteNode?
+    private var ascentHull: SKShapeNode?
     private var ascentHullJoint: SKPhysicsJointFixed?
 
     private var leftFoot: SKSpriteNode?
@@ -61,6 +61,7 @@ class LanderSprite: SKSpriteNode {
 
         let lander = LanderSprite()
         lander.position = position
+        lander.zPosition = ZPosition.lander
         lander.physicsBody?.velocity = velocity
         scene.addChild(lander)
 
@@ -72,7 +73,8 @@ class LanderSprite: SKSpriteNode {
         let ascentHull = makeAscentHullSprite()
         lander.ascentHull = ascentHull
         ascentHull.position = CGPoint(x: position.x,
-                                      y: position.y + landerHalfHeight + ascentHull.size.height / 2)
+                                      y: position.y + landerHalfHeight + Constant.ascentHullRadius)
+        ascentHull.zPosition = ZPosition.lander
         ascentHull.physicsBody?.velocity = velocity
         scene.addChild(ascentHull)
         lander.ascentHullJoint = addFixedJoint(lander, ascentHull, toScene: scene)
@@ -83,6 +85,7 @@ class LanderSprite: SKSpriteNode {
         lander.leftFoot = leftFoot
         leftFoot.position = CGPoint(x: position.x - Constant.landerSize.width / 2 - Constant.footSize.width / 2,
                                     y: position.y - Constant.legHeight - Constant.footSize.height / 2)
+        leftFoot.zPosition = ZPosition.lander
         leftFoot.physicsBody?.velocity = velocity
         scene.addChild(leftFoot)
         lander.leftFootJoint = addFixedJoint(lander, leftFoot, toScene: scene)
@@ -93,6 +96,7 @@ class LanderSprite: SKSpriteNode {
         lander.rightFoot = rightFoot
         rightFoot.position = CGPoint(x: position.x + Constant.landerSize.width / 2 + Constant.footSize.width / 2,
                                      y: position.y - Constant.legHeight - Constant.footSize.height / 2)
+        rightFoot.zPosition = ZPosition.lander
         rightFoot.physicsBody?.velocity = velocity
         scene.addChild(rightFoot)
         lander.rightFootJoint = addFixedJoint(lander, rightFoot, toScene: scene)
@@ -107,9 +111,11 @@ class LanderSprite: SKSpriteNode {
             lander.thrustMaxParticleBirthRate = thrustEmitter.particleBirthRate
             lander.thrustMaxParticleSpeed = thrustEmitter.particleSpeed
 
+            thrustEmitter.particleZPosition = ZPosition.thrust
             thrustEmitter.particleBirthRate = 0
 
             thrustEmitter.position = CGPoint(x: 0, y: -landerHeight)
+            thrustEmitter.zPosition = ZPosition.thrust
             lander.addChild(thrustEmitter)
         }
 
@@ -147,10 +153,10 @@ class LanderSprite: SKSpriteNode {
         body.collisionBitMask = Category.surface
     }
 
-    private class func makeAscentHullSprite() -> SKSpriteNode {
-        let ascentHull = SKSpriteNode(color: Color.ascentHull,
-                                      size: CGSize(width: Constant.ascentHullRadius * 2,
-                                                   height: Constant.ascentHullRadius * 2))
+    private class func makeAscentHullSprite() -> SKShapeNode {
+        let ascentHull = SKShapeNode(circleOfRadius: Constant.ascentHullRadius)
+        ascentHull.fillColor = Color.ascentHull
+        ascentHull.strokeColor = UIColor.clear
 
         let body = SKPhysicsBody(circleOfRadius: Constant.ascentHullRadius)
         ascentHull.physicsBody = body

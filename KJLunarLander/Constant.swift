@@ -41,8 +41,8 @@ enum Constant {
     /// Not historically accurate.
     static let landerTorque: CGFloat = 35
 
-    /// Scene is 600m wide by 600m high.
-    static let sceneSize = CGSize(width: 320, height: 320)
+    /// Scene is 640m wide by 640m high.
+    static let sceneSize = CGSize(width: 640, height: 640)
 
     /// Initial position of lander in scene.
     static let landerInitialPosition = CGPoint(x: sceneSize.width / 8,

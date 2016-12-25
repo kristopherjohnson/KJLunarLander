@@ -32,6 +32,7 @@ class HUD: SKNode {
         name = HUD.spriteName
 
         self.position = CGPoint()
+        self.zPosition = ZPosition.hud
         parent.addChild(self)
 
         if let skView = self.scene?.view {
@@ -102,7 +103,9 @@ class HUD: SKNode {
             let label = makeLabelNode(text: labelText)
 
             valueNode.position = valueScenePosition
+            valueNode.zPosition = ZPosition.hud
             label.position = labelScenePosition
+            label.zPosition = ZPosition.hud
 
             addChild(label)
             addChild(valueNode)
