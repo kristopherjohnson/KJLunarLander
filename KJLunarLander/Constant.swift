@@ -39,7 +39,7 @@ enum Constant {
     /// Torque applied by full rotation.
     ///
     /// Not historically accurate.
-    static let landerTorque: CGFloat = 50
+    static let landerTorque: CGFloat = 35
 
     /// Scene is 600m wide by 600m high.
     static let sceneSize = CGSize(width: 320, height: 320)
@@ -52,5 +52,5 @@ enum Constant {
     /// 
     /// Set to a high value, so lander will tend to flip rather than slide
     /// if it touches down with high lateral speed.
-    static let surfaceFriction: CGFloat = 0.8
+    static let surfaceFriction: CGFloat = 3.0
 }
