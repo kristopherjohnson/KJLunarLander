@@ -7,16 +7,16 @@
 
 import SpriteKit
 
-/// Node that displays text at the top of the screen
-
-class HUD: SKNode {
+/// Node that displays text over the screen.
+final class HUD: SKNode {
     static let spriteName = "hud"
 
     private static let fontName = "Orbitron-Light"
-    private static let fontSize: CGFloat = 10
 
-    private static let linePitch: CGFloat = 32
+    private static let fontSize: CGFloat = Constant.sceneSize.height / 32
 
+    private static let linePitch: CGFloat = fontSize * 1.25
+    
     private var altitude: SKLabelNode!
     private var horizontalSpeed: SKLabelNode!
     private var verticalSpeed: SKLabelNode!
@@ -31,50 +31,49 @@ class HUD: SKNode {
 
         name = HUD.spriteName
 
-        self.position = CGPoint()
         self.zPosition = ZPosition.hud
         parent.addChild(self)
 
-        if let skView = self.scene?.view {
-            let upperRightCorner = CGPoint(x: skView.frame.size.width,
-                                           y: 0)
-            var nextPosition = CGPoint(x: upperRightCorner.x - 100,
-                                       y: upperRightCorner.y + HUD.linePitch)
+        let sceneSize = scene!.size
+        let upperRightCorner = CGPoint(x: sceneSize.width,
+                                       y: sceneSize.height)
+        let rightInset = 5 * HUD.fontSize
+        var nextPosition = CGPoint(x: upperRightCorner.x - rightInset,
+                                   y: upperRightCorner.y - HUD.linePitch)
 
-            altitude = makeValueNode()
-            addNodes(valueNode: altitude,
-                     labelText: NSLocalizedString("Altitude",
-                                                  comment: "Altitude"),
-                     viewPosition: nextPosition)
+        altitude = makeValueNode()
+        addNodes(valueNode: altitude,
+                 labelText: NSLocalizedString("Altitude",
+                                              comment: "Altitude"),
+                 position: nextPosition)
 
-            nextPosition.y += HUD.linePitch
+        nextPosition.y -= HUD.linePitch
 
-            horizontalSpeed = makeValueNode()
-            addNodes(valueNode: horizontalSpeed,
-                     labelText: NSLocalizedString("Horizontal Speed",
-                                                  comment: "Horizontal Speed"),
-                     viewPosition: nextPosition)
+        horizontalSpeed = makeValueNode()
+        addNodes(valueNode: horizontalSpeed,
+                 labelText: NSLocalizedString("Horizontal Speed",
+                                              comment: "Horizontal Speed"),
+                 position: nextPosition)
 
-            nextPosition.y += HUD.linePitch
+        nextPosition.y -= HUD.linePitch
 
-            verticalSpeed = makeValueNode()
-            addNodes(valueNode: verticalSpeed,
-                     labelText: NSLocalizedString("Vertical Speed",
-                                                  comment: "Vertical Speed"),
-                     viewPosition: nextPosition)
+        verticalSpeed = makeValueNode()
+        addNodes(valueNode: verticalSpeed,
+                 labelText: NSLocalizedString("Vertical Speed",
+                                              comment: "Vertical Speed"),
+                 position: nextPosition)
 
-            nextPosition.y += HUD.linePitch
+        nextPosition.y -= HUD.linePitch
 
-            thrust = makeValueNode()
-            addNodes(valueNode: thrust,
-                     labelText: "Thrust",
-                     viewPosition: nextPosition)
-        }
+        thrust = makeValueNode()
+        addNodes(valueNode: thrust,
+                 labelText: "Thrust",
+                 position: nextPosition)
     }
 
     /// Update the values displayed in the HUD
     func updateDisplayValues(lander: LanderSprite) {
-        // TODO: subtract surface altitude and 1/2 lander height
+        // TODO: determine altitude relative to surface, not absolute altitude
         altitude.text = format(value: lander.position.y - 34)
 
         if let body = lander.physicsBody {
@@ -95,21 +94,19 @@ class HUD: SKNode {
     ///
     /// - parameter valueNode: The value node.
     /// - parameter labelText: Static text to be displayed to the left of the value.
-    /// - parameter viewPosition: The center of the left edge of the valueNode, in SKView coordinates.
-    private func addNodes(valueNode: SKLabelNode, labelText: String, viewPosition: CGPoint) {
-        if let skView = self.scene?.view {
-            let valueScenePosition = skView.convert(viewPosition, to: self.scene!)
-            let labelScenePosition = skView.convert(viewPosition.pointToLeft(by: 6), to: self.scene!)
-            let label = makeLabelNode(text: labelText)
+    /// - parameter position: The center of the left edge of the valueNode.
+    private func addNodes(valueNode: SKLabelNode, labelText: String, position: CGPoint) {
+        let valuePosition = position
+        let labelPosition = position.pointToLeft(by: 6)
+        let label = makeLabelNode(text: labelText)
 
-            valueNode.position = valueScenePosition
-            valueNode.zPosition = ZPosition.hud
-            label.position = labelScenePosition
-            label.zPosition = ZPosition.hud
+        valueNode.position = valuePosition
+        valueNode.zPosition = ZPosition.hud
+        label.position = labelPosition
+        label.zPosition = ZPosition.hud
 
-            addChild(label)
-            addChild(valueNode)
-        }
+        addChild(label)
+        addChild(valueNode)
     }
 
     /// Create a text node to be used as a label.
