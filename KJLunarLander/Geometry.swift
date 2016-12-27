@@ -70,7 +70,7 @@ func closedCGPath(points: [CGPoint]) -> CGPath {
     for i in 1..<count {
         path.addLine(to: points[i])
     }
-    path.addLine(to: points[0])
+    path.closeSubpath()
 
     return path
 }
