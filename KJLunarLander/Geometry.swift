@@ -56,6 +56,24 @@ extension CGPoint {
     }
 }
 
+/// Create a CGPath from an array of CGPoint.
+///
+/// - parameter points: Array of CGPoint.
+/// - returns: CGPath
+func closedCGPath(points: [CGPoint]) -> CGPath {
+    let path = CGMutablePath()
+
+    let count = points.count
+    assert(count >= 3, "closedCGPath requires at least 3 points")
+    path.move(to: points[0])
+    for i in 1..<count {
+        path.addLine(to: points[i])
+    }
+    path.addLine(to: points[0])
+
+    return path
+}
+
 extension Comparable {
 
     /// Return value clamped to specified range.

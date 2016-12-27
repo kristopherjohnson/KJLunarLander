@@ -23,7 +23,7 @@ class LanderSceneController: NSObject {
     fileprivate var state = State.start
 
     fileprivate let lander: LanderSprite
-    fileprivate let surface: SurfaceSprite
+    fileprivate let surface: SurfaceNode
     fileprivate var hud: HUD?
 
     fileprivate var lastHUDUpdateTime: TimeInterval = 0
@@ -55,9 +55,7 @@ class LanderSceneController: NSObject {
 
         hud = HUD(parent: scene)
 
-        surface = SurfaceSprite()
-        surface.position = CGPoint(x: surface.size.width / 2,
-                                   y: surface.size.height / 2)
+        surface = SurfaceNode()
         surface.zPosition = ZPosition.surface
         scene.addChild(surface)
 
