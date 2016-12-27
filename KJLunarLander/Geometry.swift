@@ -19,12 +19,12 @@ let pi4 = CGFloat(M_PI_4)
 
 /// Calculate cosine for a CGFloat angle.
 func cos(_ radians: CGFloat) -> CGFloat {
-    return CGFloat(cos(Double(radians)))
+    return CGFloat(cos(radians.native))
 }
 
 /// Calculate sine for a CGFloat angle.
 func sin(_ radians: CGFloat) -> CGFloat {
-    return CGFloat(sin(Double(radians)))
+    return CGFloat(sin(radians.native))
 }
 
 extension CGVector {
@@ -42,7 +42,7 @@ extension CGVector {
 extension CGRect {
     
     /// Get the center point of a CGRect.
-    var center: CGPoint {
+    var centerPoint: CGPoint {
         return CGPoint(x: midX, y: midY)
     }
 }
@@ -65,6 +65,7 @@ func closedCGPath(points: [CGPoint]) -> CGPath {
 
     let count = points.count
     assert(count >= 3, "closedCGPath requires at least 3 points")
+
     path.move(to: points[0])
     for i in 1..<count {
         path.addLine(to: points[i])
