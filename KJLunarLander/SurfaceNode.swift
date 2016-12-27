@@ -80,8 +80,8 @@ final class SurfaceNode: SKShapeNode {
             ( 0.34,  0.30),    // landing site left edge
             ( 0.31,  0.30),    // landing site right edge
 
-            ( 0.22,  0.05),
-            ( 0.20,  0.20),
+            ( 0.20,  0.05),
+            ( 0.16,  0.20),
 
             ( 0.12,  0.10),    // landing site left edge
             ( 0.07,  0.10),    // landing site right edge
