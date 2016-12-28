@@ -113,7 +113,11 @@ extension LanderSceneController: SKSceneDelegate {
 
         if let hud = hud {
             if (currentTime - lastHUDUpdateTime) > 0.1 {
-                hud.updateDisplayValues(lander: lander)
+                var altitude: CGFloat = 0.0
+                if let calculatedAltitude = surface.altitudeOf(point: lander.position) {
+                    altitude = calculatedAltitude - lander.landedPositionHeight
+                }
+                hud.updateDisplayValues(lander: lander, altitude: altitude)
                 lastHUDUpdateTime = currentTime
             }
         }

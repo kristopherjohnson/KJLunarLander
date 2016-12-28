@@ -72,9 +72,8 @@ final class HUD: SKNode {
     }
 
     /// Update the values displayed in the HUD
-    func updateDisplayValues(lander: LanderSprite) {
-        // TODO: determine altitude relative to surface, not absolute altitude
-        altitude.text = format(value: lander.position.y - 34)
+    func updateDisplayValues(lander: LanderSprite, altitude: CGFloat) {
+        self.altitude.text = format(value: altitude)
 
         if let body = lander.physicsBody {
             // TODO: Display directional arrows

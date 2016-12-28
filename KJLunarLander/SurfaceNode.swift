@@ -43,6 +43,61 @@ final class SurfaceNode: SKShapeNode {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// Object used as the `info` parameter to CGPathElement.apply()
+    /// in the altitudeOf() method.
+    private class AltitudeCalculationState {
+        var point = CGPoint.zero
+        var result: CGFloat?
+        var lastPoint = CGPoint.zero
+    }
+
+    /// Calculate the height of a point above the surface.
+    ///
+    /// - parameter point: A CGPoint.
+    /// - returns: Perpendicular distance above the surface, or `nil` if unable to determine.
+    func altitudeOf(point: CGPoint) -> CGFloat? {
+
+        /// Enumerate the line segments of the path, and determine the minimum
+        /// distance at which a vertical line from the point intercepts
+        /// a segment.
+
+        var state = AltitudeCalculationState()
+        state.point = point
+
+        path?.apply(info: &state) { (statePtr, elementPtr) in
+            let opaquePtr = OpaquePointer(statePtr!)
+            let state = UnsafeMutablePointer<AltitudeCalculationState>(opaquePtr).pointee
+            let element = elementPtr.pointee
+
+            switch element.type {
+
+            case .moveToPoint:
+                state.lastPoint = element.points.pointee
+
+            case .addLineToPoint:
+                let newPoint = element.points.pointee
+                if let distance = state.point.distanceAboveLineSegment(endpointA: state.lastPoint,
+                                                                       endpointB: newPoint) {
+                    if let oldResult = state.result {
+                        state.result = min(oldResult, distance)
+                    }
+                    else {
+                        state.result = distance
+                    }
+                }
+                state.lastPoint = newPoint
+
+            default:
+                // Ignore other element types.
+                // Note that we skip the .closeSubpath element, but we know
+                // that is an offscreen vertical line segment.
+                break
+            }
+        }
+
+        return state.result
+    }
+
     /// Construct a path to be provided to the SurfaceNode constructor.
     ///
     /// - todo: Construct the surface algorithmically.

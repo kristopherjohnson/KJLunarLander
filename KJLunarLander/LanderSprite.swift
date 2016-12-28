@@ -52,6 +52,11 @@ class LanderSprite: SKSpriteNode {
             }
         }
     }
+
+    /// Height of the lander's `position` point when lander is sitting on the ground.
+    let landedPositionHeight =
+        CGFloat(round(Constant.landerHullSize.height / 2 + Constant.legHeight + Constant.footSize.height / 2))
+
     /// Create a sprite for the lander at the specified position in the scene.
     ///
     /// This also creates the sprites attached to the main hull.
@@ -83,7 +88,7 @@ class LanderSprite: SKSpriteNode {
 
         let leftFoot = makeFootSprite()
         lander.leftFoot = leftFoot
-        leftFoot.position = CGPoint(x: position.x - Constant.landerSize.width / 2 - Constant.footSize.width / 2,
+        leftFoot.position = CGPoint(x: position.x - (Constant.landerSize.width / 2 + Constant.footSize.width / 2),
                                     y: position.y - Constant.legHeight - Constant.footSize.height / 2)
         leftFoot.zPosition = ZPosition.lander
         leftFoot.physicsBody?.velocity = velocity

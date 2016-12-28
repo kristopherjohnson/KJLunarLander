@@ -54,6 +54,44 @@ extension CGPoint {
     func pointToLeft(by dx: CGFloat) -> CGPoint {
         return CGPoint(x: self.x - dx, y: self.y)
     }
+
+    /// Calculate Y-axis distance between a point and a line segment.
+    ///
+    /// - parameter endpointA: One endpoint of the line segment.
+    /// - parameter endpointB: The other endpoint of the line segment.
+    ///
+    /// - returns: Distance, or `nil` if this point's x-coordinate is not between those of the endpoints.
+    func distanceAboveLineSegment(endpointA: CGPoint,
+                                  endpointB: CGPoint) -> CGFloat?
+    {
+        // Fail if endpoints are on a vertical line.
+        if endpointA.x == endpointB.x {
+            return nil
+        }
+
+        // Swap endpoints if necessary so that endpointLeft is the leftmost point.
+        var endpointLeft = endpointA
+        var endpointRight = endpointB
+        if endpointLeft.x > endpointRight.x {
+            swap(&endpointLeft, &endpointRight)
+        }
+
+        let x = self.x
+
+        // If not over the line segment, fail.
+        if x < endpointLeft.x || endpointRight.x < x {
+            return nil
+        }
+
+        // Find the y-coordinate where a vertical line crosses the line segment.
+        let slope = (endpointRight.y - endpointLeft.y) / (endpointRight.x - endpointLeft.x)
+        let dx = x - endpointLeft.x
+        let dy = slope * dx
+        let yIntercept = endpointLeft.y + dy
+
+        // Return distance.
+        return self.y - yIntercept
+    }
 }
 
 /// Create a CGPath from an array of CGPoint.
