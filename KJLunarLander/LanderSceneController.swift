@@ -68,12 +68,6 @@ class LanderSceneController: NSObject {
         scene.delegate = self
         scene.physicsWorld.contactDelegate = self
     }
-
-    func viewDidLayoutSubviews() {
-        // Recreate the HUD
-        hud?.removeFromParent()
-        hud = HUD(parent: scene)
-    }
 }
 
 // MARK: - SKSceneDelegate

@@ -30,12 +30,6 @@ class GameViewController: UIViewController {
         makeLanderSceneController()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        landerSceneController?.viewDidLayoutSubviews()
-    }
-
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .landscape
     }
