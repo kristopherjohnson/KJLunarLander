@@ -113,6 +113,18 @@ func closedCGPath(points: [CGPoint]) -> CGPath {
     return path
 }
 
+extension CGPath {
+    /// Call the given closure on each element of the path.
+    func forEach(_ body: @escaping (CGPathElement) -> Void) {
+        var info = body
+        self.apply(info: &info) { (infoPtr, elementPtr) in
+            let opaquePtr = OpaquePointer(infoPtr!)
+            let body = UnsafeMutablePointer<(CGPathElement) -> Void>(opaquePtr).pointee
+            body(elementPtr.pointee)
+        }
+    }
+}
+
 extension Comparable {
 
     /// Return value clamped to specified range.

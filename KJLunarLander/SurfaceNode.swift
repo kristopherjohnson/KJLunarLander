@@ -61,31 +61,27 @@ final class SurfaceNode: SKShapeNode {
         /// distance at which a vertical line from the point intercepts
         /// a segment.
 
-        var state = AltitudeCalculationState()
-        state.point = point
+        var result: CGFloat?
+        var lastPoint = CGPoint.zero
 
-        path?.apply(info: &state) { (statePtr, elementPtr) in
-            let opaquePtr = OpaquePointer(statePtr!)
-            let state = UnsafeMutablePointer<AltitudeCalculationState>(opaquePtr).pointee
-            let element = elementPtr.pointee
-
+        path?.forEach { (element) in
             switch element.type {
 
             case .moveToPoint:
-                state.lastPoint = element.points.pointee
+                lastPoint = element.points.pointee
 
             case .addLineToPoint:
                 let newPoint = element.points.pointee
-                if let distance = state.point.distanceAboveLineSegment(endpointA: state.lastPoint,
+                if let distance = point.distanceAboveLineSegment(endpointA: lastPoint,
                                                                        endpointB: newPoint) {
-                    if let oldResult = state.result {
-                        state.result = min(oldResult, distance)
+                    if let oldResult = result {
+                        result = min(oldResult, distance)
                     }
                     else {
-                        state.result = distance
+                        result = distance
                     }
                 }
-                state.lastPoint = newPoint
+                lastPoint = newPoint
 
             default:
                 // Ignore other element types.
@@ -95,7 +91,7 @@ final class SurfaceNode: SKShapeNode {
             }
         }
 
-        return state.result
+        return result
     }
 
     /// Construct a path to be provided to the SurfaceNode constructor.
