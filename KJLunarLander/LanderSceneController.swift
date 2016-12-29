@@ -19,6 +19,7 @@ class LanderSceneController: NSObject {
 
     private let view: SKView
     private let scene: SKScene
+    private let camera: SKCameraNode
 
     fileprivate var state = State.start
 
@@ -39,6 +40,12 @@ class LanderSceneController: NSObject {
 
         scene.physicsWorld.gravity = CGVector.zero
 
+        camera = SKCameraNode()
+        camera.position = scene.frame.centerPoint
+        camera.setScale(1.0)
+        scene.camera = camera
+        scene.addChild(camera)
+
         view.presentScene(scene)
 
         view.ignoresSiblingOrder = true
@@ -53,7 +60,7 @@ class LanderSceneController: NSObject {
             //view.showsFields = true
         }
 
-        hud = HUD(parent: scene)
+        hud = HUD(parent: camera)
 
         surface = SurfaceNode()
         surface.zPosition = ZPosition.surface

@@ -34,9 +34,9 @@ final class HUD: SKNode {
         self.zPosition = ZPosition.hud
         parent.addChild(self)
 
-        let sceneSize = scene!.size
-        let upperRightCorner = CGPoint(x: sceneSize.width,
-                                       y: sceneSize.height)
+        let sceneSize = Constant.sceneSize
+        let upperRightCorner = CGPoint(x: sceneSize.width / 2,
+                                       y: sceneSize.height / 2)
         let rightInset = 5 * HUD.fontSize
         var nextPosition = CGPoint(x: upperRightCorner.x - rightInset,
                                    y: upperRightCorner.y - HUD.linePitch)
