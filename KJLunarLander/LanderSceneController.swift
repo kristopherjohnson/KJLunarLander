@@ -19,7 +19,8 @@ class LanderSceneController: NSObject {
 
     private let view: SKView
     private let scene: SKScene
-    private let camera: SKCameraNode
+
+    fileprivate let camera: Camera
 
     fileprivate var state = State.start
 
@@ -40,9 +41,8 @@ class LanderSceneController: NSObject {
 
         scene.physicsWorld.gravity = CGVector.zero
 
-        camera = SKCameraNode()
+        camera = Camera()
         camera.position = scene.frame.centerPoint
-        camera.setScale(1.0)
         scene.camera = camera
         scene.addChild(camera)
 
@@ -110,14 +110,19 @@ extension LanderSceneController: SKSceneDelegate {
             landerBody.applyTorque(torque)
         }
 
-        // Update HUD.
+        // Calculate current altitude above surface.
+
+        var altitude: CGFloat = 0.0
+        if let calculatedAltitude = surface.altitudeOf(point: lander.position) {
+            altitude = calculatedAltitude - lander.landedPositionHeight
+        }
+
+        // Update camera position and HUD.
+
+        camera.follow(focusPosition: lander.position, altitude: altitude)
 
         if let hud = hud {
             if (currentTime - lastHUDUpdateTime) > 0.1 {
-                var altitude: CGFloat = 0.0
-                if let calculatedAltitude = surface.altitudeOf(point: lander.position) {
-                    altitude = calculatedAltitude - lander.landedPositionHeight
-                }
                 hud.updateDisplayValues(lander: lander, altitude: altitude)
                 lastHUDUpdateTime = currentTime
             }

@@ -19,6 +19,7 @@
 		4E27D3E51DFC3EE90075B8BE /* Orbitron Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E27D3E41DFC3EE90075B8BE /* Orbitron Light.otf */; };
 		4EBF7C521E04C7CE00751DFF /* ThrustParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4EBF7C511E04C7CE00751DFF /* ThrustParticle.sks */; };
 		4EC088CA1E10464E005C762C /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC088C91E10464E005C762C /* ZPosition.swift */; };
+		4EC088CC1E14B8B6005C762C /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC088CB1E14B8B6005C762C /* Camera.swift */; };
 		4ED5CF2B1DE919A200D2BD01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */; };
 		4ED5CF331DE919A200D2BD01 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED5CF321DE919A200D2BD01 /* GameViewController.swift */; };
 		4ED5CF361DE919A200D2BD01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED5CF341DE919A200D2BD01 /* Main.storyboard */; };
@@ -52,6 +53,7 @@
 		4E27D3E41DFC3EE90075B8BE /* Orbitron Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Orbitron Light.otf"; path = "Fonts/Orbitron/Orbitron Light.otf"; sourceTree = SOURCE_ROOT; };
 		4EBF7C511E04C7CE00751DFF /* ThrustParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ThrustParticle.sks; sourceTree = "<group>"; };
 		4EC088C91E10464E005C762C /* ZPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZPosition.swift; sourceTree = "<group>"; };
+		4EC088CB1E14B8B6005C762C /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		4ED5CF271DE919A200D2BD01 /* KJLunarLander.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KJLunarLander.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4ED5CF321DE919A200D2BD01 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				4ED5CF2A1DE919A200D2BD01 /* AppDelegate.swift */,
 				4ED5CF371DE919A200D2BD01 /* Assets.xcassets */,
+				4EC088CB1E14B8B6005C762C /* Camera.swift */,
 				4E0DFD9F1DF3CC5D00A8A24F /* Category.swift */,
 				4EFA3CC21DF8E81000319494 /* Color.swift */,
 				4E0DFDA31DF3D38A00A8A24F /* Constant.swift */,
@@ -264,6 +267,7 @@
 				4ED5CF2B1DE919A200D2BD01 /* AppDelegate.swift in Sources */,
 				4EFA3CC51DF8EA9200319494 /* ThrustControl.swift in Sources */,
 				4E0DFD9E1DF3CBAF00A8A24F /* LanderSprite.swift in Sources */,
+				4EC088CC1E14B8B6005C762C /* Camera.swift in Sources */,
 				4E0DFDAA1DF4A34900A8A24F /* ControlButton.swift in Sources */,
 				4E0DFDA61DF3D5F400A8A24F /* ControlInput.swift in Sources */,
 				4E0DFD9C1DF3C43200A8A24F /* LanderSceneController.swift in Sources */,
