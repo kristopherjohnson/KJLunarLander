@@ -18,8 +18,11 @@ enum ColumnLayout {
 
 /// Positions a set of SKLabelNodes in a grid.
 ///
-/// - parameter left: Leftmost coordinate at which elements will be positioned.
-/// - parameter top: Topmost coordinate at which elements will be positioned.
+/// Sets the `position` and `horizontalAlignmentMode` properties
+/// of each `SKLabelNode`.
+///
+/// - parameter left: X coordinate at which first-column elements will be positioned.
+/// - parameter top: Y coordinate at which first-row elements will be positioned.
 /// - parameter horizontalPadding: Space between rows.
 /// - parameter verticalPadding: Space between columns.
 /// - parameter rowHeight: Height of each row.
@@ -38,7 +41,7 @@ func layoutGrid(left: CGFloat,
 {
     var size = CGSize()
 
-    var rowY = top
+    var rowTop = top
 
     var isFirstRow = true
 
@@ -47,19 +50,19 @@ func layoutGrid(left: CGFloat,
             isFirstRow = false
         }
         else {
-            rowY -= verticalPadding
             size.height += verticalPadding
+            rowTop -= verticalPadding
         }
 
-        let rowSize = layoutRow(left: left,
-                                top: rowY,
-                                horizontalPadding: horizontalPadding,
-                                rowHeight: rowHeight,
-                                columnLayouts: columnLayouts,
-                                nodes: row)
-        size.width = max(size.width, rowSize.width)
-        size.height += rowSize.height
-        rowY -= rowSize.height
+        let rowWidth = layoutRow(left: left,
+                                 y: rowTop,
+                                 horizontalPadding: horizontalPadding,
+                                 rowHeight: rowHeight,
+                                 columnLayouts: columnLayouts,
+                                 nodes: row)
+        size.width = max(size.width, rowWidth)
+        size.height += rowHeight
+        rowTop -= rowHeight
     }
 
     return size
@@ -67,25 +70,29 @@ func layoutGrid(left: CGFloat,
 
 /// Positions a set of SKLabelNodes in a row from left to right.
 ///
-/// - parameter left: Leftmost coordinate at which elements will be positioned.
-/// - parameter top: Topmost coordinate at which elements will be positioned.
+/// Sets the `position` and `horizontalAlignmentMode` properties
+/// of each `SKLabelNode`.
+///
+/// - parameter left: X coordinate at which first-column element will be positioned.
+/// - parameter y: Y coordinate at which elements will be positioned.
 /// - parameter horizontalPadding: Space between rows.
 /// - parameter rowHeight: Height of each row.
 /// - parameter columnLayouts: Specification of column constraints.
 /// - parameter nodes: Array of SKLabelNodes ordered from left to right.
 ///
-/// - returns: Size of row.
+/// - returns: Width of laid-out elements.
 func layoutRow(left: CGFloat,
-               top: CGFloat,
+               y: CGFloat,
                horizontalPadding: CGFloat,
                rowHeight: CGFloat,
                columnLayouts: [ColumnLayout],
                nodes: [SKLabelNode])
-    -> CGSize
+    -> CGFloat
 {
-    assert(columnLayouts.count >= nodes.count, "columnLayouts must have at least as many elements as nodes")
+    assert(columnLayouts.count >= nodes.count,
+           "columnLayouts must have at least as many elements as nodes")
 
-    var size = CGSize(width: 0, height: rowHeight)
+    var totalWidth = CGFloat(0.0)
 
     var columnLeft = left
 
@@ -93,18 +100,17 @@ func layoutRow(left: CGFloat,
 
     for i in 0..<nodes.count {
         if isFirstColumn {
-            columnLeft += horizontalPadding
             isFirstColumn = false
         }
         else {
             columnLeft += horizontalPadding
-            size.width += horizontalPadding
+            totalWidth += horizontalPadding
         }
 
         let node = nodes[i]
         let columnLayout = columnLayouts[i]
 
-        node.position.y = top
+        node.position.y = y
 
         switch columnLayout {
 
@@ -112,15 +118,15 @@ func layoutRow(left: CGFloat,
             node.horizontalAlignmentMode = .left
             node.position.x = columnLeft
             columnLeft += width
-            size.width += width
+            totalWidth += width
 
         case .right(let width):
             node.horizontalAlignmentMode = .right
             columnLeft += width
             node.position.x = columnLeft
-            size.width += width
+            totalWidth += width
         }
     }
 
-    return size
+    return totalWidth
 }
