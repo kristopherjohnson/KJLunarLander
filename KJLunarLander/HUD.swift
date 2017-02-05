@@ -15,8 +15,6 @@ final class HUD: SKNode {
 
     private static let fontSize: CGFloat = Constant.sceneSize.height / 32
 
-    private static let linePitch: CGFloat = fontSize * 1.25
-    
     private var altitude: SKLabelNode!
     private var horizontalSpeed: SKLabelNode!
     private var verticalSpeed: SKLabelNode!
@@ -34,41 +32,51 @@ final class HUD: SKNode {
         self.zPosition = ZPosition.hud
         parent.addChild(self)
 
+        // Create SKLabelNodes for text elements.
+
+        let altitudeLabel = addLabelNode(
+            text: NSLocalizedString("Altitude",
+                                    comment: "Altitude"))
+        altitude = addValueNode()
+
+        let horizontalSpeedLabel = addLabelNode(
+            text: NSLocalizedString("Horizontal Speed",
+                                    comment: "Horizontal Speed"))
+        horizontalSpeed = addValueNode()
+
+        let verticalSpeedLabel = addLabelNode(
+                 text: NSLocalizedString("Vertical Speed",
+                                         comment: "Vertical Speed"))
+        verticalSpeed = addValueNode()
+
+        let thrustLabel = addLabelNode(
+            text: NSLocalizedString("Thrust",
+                                    comment: "Thrust"))
+        thrust = addValueNode()
+
+        // Lay out the labels.
+
         let sceneSize = Constant.sceneSize
         let upperRightCorner = CGPoint(x: sceneSize.width / 2,
                                        y: sceneSize.height / 2)
-        let rightInset = 5 * HUD.fontSize
-        var nextPosition = CGPoint(x: upperRightCorner.x - rightInset,
-                                   y: upperRightCorner.y - HUD.linePitch)
-
-        altitude = makeValueNode()
-        addNodes(valueNode: altitude,
-                 labelText: NSLocalizedString("Altitude",
-                                              comment: "Altitude"),
-                 position: nextPosition)
-
-        nextPosition.y -= HUD.linePitch
-
-        horizontalSpeed = makeValueNode()
-        addNodes(valueNode: horizontalSpeed,
-                 labelText: NSLocalizedString("Horizontal Speed",
-                                              comment: "Horizontal Speed"),
-                 position: nextPosition)
-
-        nextPosition.y -= HUD.linePitch
-
-        verticalSpeed = makeValueNode()
-        addNodes(valueNode: verticalSpeed,
-                 labelText: NSLocalizedString("Vertical Speed",
-                                              comment: "Vertical Speed"),
-                 position: nextPosition)
-
-        nextPosition.y -= HUD.linePitch
-
-        thrust = makeValueNode()
-        addNodes(valueNode: thrust,
-                 labelText: "Thrust",
-                 position: nextPosition)
+        let columnLayouts: [ColumnLayout] = [
+            .right(width: 100), // label
+            .right(width: 50),  // value
+            .left(width: 25)    // optional additional indicator
+        ]
+        let rows: [[SKLabelNode]] = [
+            [altitudeLabel,        altitude],
+            [horizontalSpeedLabel, horizontalSpeed],
+            [verticalSpeedLabel,   verticalSpeed],
+            [thrustLabel,          thrust]
+        ]
+        let _ = layoutGrid(left: upperRightCorner.x - 200,
+                           top: upperRightCorner.y - 2 * HUD.fontSize,
+                           horizontalPadding: 6,
+                           verticalPadding: 6,
+                           rowHeight: HUD.fontSize,
+                           columnLayouts: columnLayouts,
+                           rows: rows)
     }
 
     /// Update the values displayed in the HUD
@@ -89,45 +97,22 @@ final class HUD: SKNode {
         return String(format: "%d", Int(roundf(Float(value))))
     }
 
-    /// Add a node to display a value, along with a label node.
-    ///
-    /// - parameter valueNode: The value node.
-    /// - parameter labelText: Static text to be displayed to the left of the value.
-    /// - parameter position: The center of the left edge of the valueNode.
-    private func addNodes(valueNode: SKLabelNode, labelText: String, position: CGPoint) {
-        let valuePosition = position
-        let labelPosition = position.pointToLeft(by: 6)
-        let label = makeLabelNode(text: labelText)
-
-        valueNode.position = valuePosition
-        valueNode.zPosition = ZPosition.hud
-        label.position = labelPosition
-        label.zPosition = ZPosition.hud
-
-        addChild(label)
-        addChild(valueNode)
-    }
-
     /// Create a text node to be used as a label.
-    ///
-    /// Labels are right-aligned.
-    private func makeLabelNode(text: String) -> SKLabelNode {
+    private func addLabelNode(text: String) -> SKLabelNode {
         let node = SKLabelNode(fontNamed: HUD.fontName)
         node.fontSize = HUD.fontSize
         node.fontColor = Color.hud
-        node.horizontalAlignmentMode = .right
         node.text = text
+        addChild(node)
         return node
     }
 
     /// Create a text node to be used to display a value.
-    ///
-    /// Values are left-aligned.
-    private func makeValueNode() -> SKLabelNode {
+    private func addValueNode() -> SKLabelNode {
         let node = SKLabelNode(fontNamed: HUD.fontName)
         node.fontSize = HUD.fontSize
         node.fontColor = Color.hud
-        node.horizontalAlignmentMode = .left
+        addChild(node)
         return node
     }
 }
