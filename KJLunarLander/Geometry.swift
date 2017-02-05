@@ -49,10 +49,29 @@ extension CGRect {
 
 extension CGPoint {
 
+    /// Return a CGPoint with this point's coordinates rounded to nearest whole coordinates.
+    ///
+    /// - returns: `CGPoint` with non-fractional coordinates
+    var roundedCoordinates: CGPoint {
+        return CGPoint(x: round(self.x),
+                       y: round(self.y))
+    }
+
     /// Return a point that is offset to the left of
     /// this point by the specified amount.
     func pointToLeft(by dx: CGFloat) -> CGPoint {
-        return CGPoint(x: self.x - dx, y: self.y)
+        return CGPoint(x: self.x - dx,
+                       y: self.y)
+    }
+
+    /// Calculate the distance to another point.
+    ///
+    /// - parameter point: A point.
+    ///
+    /// - returns: Non-negative distance.
+    func distanceTo(point: CGPoint) -> CGFloat {
+        return CGFloat(hypot(self.x - point.x,
+                             self.y - point.y))
     }
 
     /// Calculate Y-axis distance between a point and a line segment.

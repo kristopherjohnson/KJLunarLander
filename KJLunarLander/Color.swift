@@ -25,5 +25,5 @@ enum Color {
     static let hud = SKColor.green
 
     /// Color of lunar surface.
-    static let surface = SKColor.gray
+    static let surface = SKColor(white: 0.125, alpha: 1.0)
 }

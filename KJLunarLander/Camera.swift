@@ -79,7 +79,7 @@ final class Camera: SKCameraNode {
         let screenXRange = halfCameraSpan...(sceneSpan - halfCameraSpan)
         newPosition.x = newPosition.x.clamped(to: screenXRange)
 
-        return newPosition
+        return newPosition.roundedCoordinates
     }
 
     private func zoomCameraOut() {
