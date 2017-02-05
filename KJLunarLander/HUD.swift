@@ -13,7 +13,7 @@ final class HUD: SKNode {
 
     private static let fontName = "Orbitron-Light"
 
-    private static let fontSize: CGFloat = Constant.sceneSize.height / 32
+    private static let fontSize: CGFloat = Constant.sceneSize.height / 36
 
     private var altitude: SKLabelNode!
     private var horizontalSpeed: SKLabelNode!
@@ -62,7 +62,7 @@ final class HUD: SKNode {
         let columnLayouts: [ColumnLayout] = [
             .right(width: 100), // label
             .right(width: 50),  // value
-            .left(width: 25)    // optional additional indicator
+            .left(width: 20)    // optional additional indicator
         ]
         let rows: [[SKLabelNode]] = [
             [altitudeLabel,        altitude],
@@ -84,7 +84,7 @@ final class HUD: SKNode {
         self.altitude.text = format(value: altitude)
 
         if let body = lander.physicsBody {
-            // TODO: Display directional arrows
+            // TODO: Display directional arrows instead of +/-
             horizontalSpeed.text = format(value: body.velocity.dx)
             verticalSpeed.text = format(value: body.velocity.dy)
         }
